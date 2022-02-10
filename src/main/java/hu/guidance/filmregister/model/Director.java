@@ -1,16 +1,20 @@
 package hu.guidance.filmregister.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "GENRES")
-public class Genre {
+@Table(name = "DIRECTOR")
+public class Director {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +23,8 @@ public class Genre {
 
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "BIRTHDAY")
+    private LocalDate birthDay;
 
 }
