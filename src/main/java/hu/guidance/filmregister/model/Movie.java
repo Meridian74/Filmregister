@@ -12,7 +12,7 @@ import java.time.Duration;
 @AllArgsConstructor
 @Entity
 @Table(name = "MOVIES")
-public class Movies {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
