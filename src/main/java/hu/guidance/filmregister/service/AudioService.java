@@ -29,7 +29,7 @@ public class AudioService {
 
     public AudioDTO createAudio(CreateAudioCommand command) {
         Audio audio = new Audio();
-        audio.setLanguage(command.getLaguage());
+        audio.setLanguage(command.getLanguage());
 
         audio = audioRepository.save(audio);
         return modelMapper.map(audio, AudioDTO.class);

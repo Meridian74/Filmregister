@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class CreateAudioCommand {
 
     @Schema(description = "Name of the new movie audio language", example = "francia")
-    private String laguage;
+    private String language;
 
 }
