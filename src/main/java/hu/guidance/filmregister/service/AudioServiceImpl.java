@@ -39,10 +39,10 @@ public class AudioServiceImpl implements AudioService {
 
     @Override
     public AudioDTO findAudioById(long id) {
-        Optional<Audio> optionalEmployee = audioRepository.findById(id);
+        Optional<Audio> optionalAudio = audioRepository.findById(id);
 
-        if (optionalEmployee.isPresent()) {
-            return modelMapper.map(optionalEmployee.get(), AudioDTO.class);
+        if (optionalAudio.isPresent()) {
+            return modelMapper.map(optionalAudio.get(), AudioDTO.class);
         }
         else {
             throw new AudioNotFoundException(id);
@@ -58,18 +58,18 @@ public class AudioServiceImpl implements AudioService {
             throw new AudioNotFoundException(id);
         }
 
-        Audio employee = optionalAudio.get();
+        Audio audio = optionalAudio.get();
         if (command.getLanguage() != null && !command.getLanguage().equals("") ) {
-            employee.setLanguage(command.getLanguage());
+            audio.setLanguage(command.getLanguage());
         }
 
-        return modelMapper.map(employee, AudioDTO.class);
+        return modelMapper.map(audio, AudioDTO.class);
     }
 
     @Override
     public void deleteAudioById(long id) {
-        Optional<Audio> optionalEmployee = audioRepository.findById(id);
-        if (optionalEmployee.isPresent()) {
+        Optional<Audio> optionalAudio = audioRepository.findById(id);
+        if (optionalAudio.isPresent()) {
             audioRepository.deleteById(id);
         }
         else {
@@ -81,8 +81,8 @@ public class AudioServiceImpl implements AudioService {
     public List<AudioDTO> listAllAudios(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<AudioDTO>>(){}.getType();
 
-        List<Audio> employees = audioRepository.findAll();
-        List<Audio> filtered = employees.stream()
+        List<Audio> audio = audioRepository.findAll();
+        List<Audio> filtered = audio.stream()
                 .filter(e -> prefix.isEmpty()
                         || e.getLanguage().toLowerCase().startsWith(prefix.get().toLowerCase()))
                 .collect(Collectors.toList());

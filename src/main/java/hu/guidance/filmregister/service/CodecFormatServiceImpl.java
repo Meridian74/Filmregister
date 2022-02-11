@@ -81,8 +81,8 @@ public class CodecFormatServiceImpl implements CodecFormatService {
     public List<CodecFormatDTO> listAllCodecFormats(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<CodecFormatDTO>>(){}.getType();
 
-        List<CodecFormat> employees = codecFormatRepository.findAll();
-        List<CodecFormat> filtered = employees.stream()
+        List<CodecFormat> codecFormat = codecFormatRepository.findAll();
+        List<CodecFormat> filtered = codecFormat.stream()
                 .filter(e -> prefix.isEmpty()
                         || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase()))
                 .collect(Collectors.toList());

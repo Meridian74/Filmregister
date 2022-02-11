@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateCodecFormatCommand {
+public class CreateGenreCommand {
 
-    @Schema(description = "ID number to select video codec format", example = "1")
-    private long id;
-
-    @Schema(description = "Updated name for the selected video codec format record", example = "MPEG-2")
+    @Schema(description = "Name of the new movie genre", example = "sci-fi")
     private String name;
+
 }

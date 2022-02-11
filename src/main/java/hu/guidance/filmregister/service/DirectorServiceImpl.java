@@ -71,8 +71,8 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public void deleteDirectorById(long id) {
-        Optional<Director> optionalEmployee = directorRepository.findById(id);
-        if (optionalEmployee.isPresent()) {
+        Optional<Director> optionalDirector = directorRepository.findById(id);
+        if (optionalDirector.isPresent()) {
             directorRepository.deleteById(id);
         }
         else {
@@ -84,8 +84,8 @@ public class DirectorServiceImpl implements DirectorService {
     public List<DirectorDTO> listAllDirectors(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<DirectorDTO>>(){}.getType();
 
-        List<Director> employees = directorRepository.findAll();
-        List<Director> filtered = employees.stream()
+        List<Director> director = directorRepository.findAll();
+        List<Director> filtered = director.stream()
                 .filter(e -> prefix.isEmpty()
                         || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase()))
                 .collect(Collectors.toList());

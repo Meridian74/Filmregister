@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateAudioCommand {
+public class UpdateGenreCommand {
 
-    @Schema(description = "ID number to select audio language", example = "1")
+    @Schema(description = "ID number to select movie genre", example = "1")
     private long id;
 
-    @Schema(description = "Updated name for the selected audio language record", example = "francia")
-    private String language;
+    @Schema(description = "Updated name for the selected genre record", example = "akció")
+    private String name;
+
 }

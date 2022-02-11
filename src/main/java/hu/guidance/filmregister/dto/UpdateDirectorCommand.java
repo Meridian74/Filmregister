@@ -12,13 +12,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UpdateDirectorCommand {
 
-    @Schema(description = "ID number to select director for modifying", example = "17")
+    @Schema(description = "ID number to select movie director", example = "17")
     private long id;
 
-    @Schema(description = "Modify name of the director", example = "George Lucas")
+    @Schema(description = "Updated name for the selected movie director record", example = "George Lucas")
     private String name;
 
-    @Schema(description = "Modify the birthday date of the director", example = "1962-09-18")
+    @Schema(description = "Updated birthday date for the selected movie director record", example = "1962-09-18")
     private LocalDate birthDay;
 
 }
