@@ -30,7 +30,7 @@ public class CodecFormatServiceImpl implements CodecFormatService {
     @Override
     public CodecFormatDTO createCodecFormat(CreateCodecFormatCommand command) {
         CodecFormat codecFormat = new CodecFormat();
-        codecFormat.setName(command.getLanguage());
+        codecFormat.setName(command.getName());
 
         codecFormat = codecFormatRepository.save(codecFormat);
         return modelMapper.map(codecFormat, CodecFormatDTO.class);
@@ -39,10 +39,10 @@ public class CodecFormatServiceImpl implements CodecFormatService {
 
     @Override
     public CodecFormatDTO findCodecFormatById(long id) {
-        Optional<CodecFormat> optionalEmployee = codecFormatRepository.findById(id);
+        Optional<CodecFormat> optionalCodecFormat = codecFormatRepository.findById(id);
 
-        if (optionalEmployee.isPresent()) {
-            return modelMapper.map(optionalEmployee.get(), CodecFormatDTO.class);
+        if (optionalCodecFormat.isPresent()) {
+            return modelMapper.map(optionalCodecFormat.get(), CodecFormatDTO.class);
         }
         else {
             throw new CodecFormatNotFoundException(id);
@@ -58,18 +58,18 @@ public class CodecFormatServiceImpl implements CodecFormatService {
             throw new CodecFormatNotFoundException(id);
         }
 
-        CodecFormat employee = optionalCodecFormat.get();
-        if (command.getLanguage() != null && !command.getLanguage().equals("") ) {
-            employee.setName(command.getLanguage());
+        CodecFormat codecFormat = optionalCodecFormat.get();
+        if (command.getName() != null && !command.getName().equals("") ) {
+            codecFormat.setName(command.getName());
         }
 
-        return modelMapper.map(employee, CodecFormatDTO.class);
+        return modelMapper.map(codecFormat, CodecFormatDTO.class);
     }
 
     @Override
-    public void deleteEmployeeById(long id) {
-        Optional<CodecFormat> optionalEmployee = codecFormatRepository.findById(id);
-        if (optionalEmployee.isPresent()) {
+    public void deleteCodecFormatById(long id) {
+        Optional<CodecFormat> optionalCodecFormat = codecFormatRepository.findById(id);
+        if (optionalCodecFormat.isPresent()) {
             codecFormatRepository.deleteById(id);
         }
         else {

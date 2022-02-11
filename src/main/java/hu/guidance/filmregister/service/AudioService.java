@@ -16,7 +16,7 @@ public interface AudioService {
     @Transactional
     AudioDTO updateAudio(long id, UpdateAudioCommand command);
 
-    void deleteEmployeeById(long id);
+    void deleteAudioById(long id);
 
     List<AudioDTO> listAllAudios(Optional<String> prefix);
 

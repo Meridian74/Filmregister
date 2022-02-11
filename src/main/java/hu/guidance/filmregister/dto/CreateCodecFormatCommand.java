@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class CreateCodecFormatCommand {
 
     @Schema(description = "Name of the new video codec format", example = "MPEG-2")
-    private String language;
+    private String name;
 
 }

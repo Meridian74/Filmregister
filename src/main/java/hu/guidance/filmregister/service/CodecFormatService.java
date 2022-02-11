@@ -16,7 +16,7 @@ public interface CodecFormatService {
     @Transactional
     CodecFormatDTO updateCodecFormat(long id, UpdateCodecFormatCommand command);
 
-    void deleteEmployeeById(long id);
+    void deleteCodecFormatById(long id);
 
     List<CodecFormatDTO> listAllCodecFormats(Optional<String> prefix);
 }

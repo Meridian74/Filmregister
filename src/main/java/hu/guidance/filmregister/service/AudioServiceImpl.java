@@ -67,7 +67,7 @@ public class AudioServiceImpl implements AudioService {
     }
 
     @Override
-    public void deleteEmployeeById(long id) {
+    public void deleteAudioById(long id) {
         Optional<Audio> optionalEmployee = audioRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             audioRepository.deleteById(id);

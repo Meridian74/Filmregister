@@ -4,7 +4,6 @@ import hu.guidance.filmregister.dto.AudioDTO;
 import hu.guidance.filmregister.dto.CreateAudioCommand;
 import hu.guidance.filmregister.dto.UpdateAudioCommand;
 import hu.guidance.filmregister.service.AudioService;
-import hu.guidance.filmregister.service.AudioServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,7 +26,7 @@ public class AudioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Creates an new audio language.")
+    @Operation(summary = "Create a new audio language.")
     @ApiResponse(responseCode = "201", description = "Audio language has been created.")
     public AudioDTO createAudio(@RequestBody CreateAudioCommand command) {
         return audioService.createAudio(command);
@@ -52,7 +51,7 @@ public class AudioController {
     @Operation(summary = "Delete an audio by ID number")
     @ApiResponse(responseCode = "204", description = "Audio language has been deleted")
     public void deleteAudio(@PathVariable("id") long id) {
-        audioService.deleteEmployeeById(id);
+        audioService.deleteAudioById(id);
     }
 
     @GetMapping

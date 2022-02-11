@@ -14,5 +14,5 @@ public class UpdateCodecFormatCommand {
     private long id;
 
     @Schema(description = "New codec format name in the selected codec format record", example = "MPEG-2")
-    private String language;
+    private String name;
 }
