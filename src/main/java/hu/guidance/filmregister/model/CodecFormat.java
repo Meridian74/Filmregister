@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "CODEC_FORMATS")
-public class CodecFormats {
+public class CodecFormat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
