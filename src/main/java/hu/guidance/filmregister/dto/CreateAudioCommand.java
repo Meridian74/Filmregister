@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 
 @Data
 @NoArgsConstructor
@@ -12,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class CreateAudioCommand {
 
     @Schema(description = "Name of the new movie audio language", example = "francia")
+    @NotBlank(message = "Language can not be empty")
     private String language;
 
 }

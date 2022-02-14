@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/subtitle")
-@Tag(name = "Operations of Subtitle records")
+@Tag(name = "Operations on Subtitle records")
 public class SubtitleController {
 
     private final SubtitleService subtitleService;
@@ -28,7 +29,7 @@ public class SubtitleController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new subtitle language.")
     @ApiResponse(responseCode = "201", description = "Subtitle language has been created.")
-    public SubtitleDTO createSubtitle(@RequestBody CreateSubtitleCommand command) {
+    public SubtitleDTO createSubtitle(@Validated @RequestBody CreateSubtitleCommand command) {
         return subtitleService.createSubtitle(command);
     }
 
@@ -41,6 +42,7 @@ public class SubtitleController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating an subtitle language with given data founded it by ID number")
     public SubtitleDTO updateSubtitle(
+            @Validated
             @PathVariable("id") Long id,
             @RequestBody UpdateSubtitleCommand command) {
         return subtitleService.updateSubtitle(id, command);

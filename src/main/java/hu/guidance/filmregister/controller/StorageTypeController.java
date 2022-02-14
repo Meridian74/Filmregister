@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/storagetype")
-@Tag(name = "Operations of Storage Type records")
+@Tag(name = "Operations on Storage Type records")
 public class StorageTypeController {
 
     private final StorageTypeService storageTypeService;
@@ -28,7 +29,7 @@ public class StorageTypeController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new storage type")
     @ApiResponse(responseCode = "201", description = "Storage type has been created")
-    public StorageTypeDTO createStorageType(@RequestBody CreateStorageTypeCommand command) {
+    public StorageTypeDTO createStorageType(@Validated @RequestBody CreateStorageTypeCommand command) {
         return storageTypeService.createStorageType(command);
     }
 
@@ -41,6 +42,7 @@ public class StorageTypeController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating a storage type with given data founded it by ID number")
     public StorageTypeDTO updateStorageType(
+            @Validated
             @PathVariable("id") Long id,
             @RequestBody UpdateStorageTypeCommand command) {
         return storageTypeService.updateStorageType(id, command);

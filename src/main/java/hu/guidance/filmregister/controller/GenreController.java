@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/genre")
-@Tag(name = "Operations of movie's Genre records")
+@Tag(name = "Operations on movie's Genre records")
 public class GenreController {
 
     private final GenreService genreService;
@@ -28,7 +29,7 @@ public class GenreController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie genre")
     @ApiResponse(responseCode = "201", description = "Movie genre has been created")
-    public GenreDTO createGenre(@RequestBody CreateGenreCommand command) {
+    public GenreDTO createGenre(@Validated @RequestBody CreateGenreCommand command) {
         return genreService.createGenre(command);
     }
 
@@ -41,6 +42,7 @@ public class GenreController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating a movie genre with given data founded it by ID number")
     public GenreDTO updateGenre(
+            @Validated
             @PathVariable("id") Long id,
             @RequestBody UpdateGenreCommand command) {
         return genreService.updateGenre(id, command);

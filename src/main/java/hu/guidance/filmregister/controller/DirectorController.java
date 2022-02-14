@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/director")
-@Tag(name = "Operations of movie's Director records")
+@Tag(name = "Operations on movie's Director records")
 public class DirectorController {
 
     private final DirectorService directorService;
@@ -28,7 +29,7 @@ public class DirectorController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie director.")
     @ApiResponse(responseCode = "201", description = "Director has been created")
-    public DirectorDTO createDirector(@RequestBody CreateDirectorCommand command) {
+    public DirectorDTO createDirector(@Validated @RequestBody CreateDirectorCommand command) {
         return directorService.createDirector(command);
     }
 
@@ -41,6 +42,7 @@ public class DirectorController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating a movie director with given data founded it by ID number")
     public DirectorDTO updateDirector(
+            @Validated
             @PathVariable("id") Long id,
             @RequestBody UpdateDirectorCommand command) {
         return directorService.updateDirector(id, command);
