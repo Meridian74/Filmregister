@@ -1,5 +1,6 @@
 package hu.guidance.filmregister.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Movie {
     private String titleOriginal;
 
     @Column(name = "DURATION")
+    @JsonFormat(pattern="HH:mm:ss")
     private LocalTime duration;
 
     @Column(name = "GENRE_ID")
@@ -53,6 +55,5 @@ public class Movie {
 
     @Column(name = "STORAGE_NUMBER")
     private Integer storageNumber;
-
 
 }
