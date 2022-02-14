@@ -38,7 +38,7 @@ public class CodecFormatServiceImpl implements CodecFormatService {
     }
 
     @Override
-    public CodecFormatDTO findCodecFormatById(long id) {
+    public CodecFormatDTO findCodecFormatById(Long id) {
         Optional<CodecFormat> optionalCodecFormat = codecFormatRepository.findById(id);
 
         if (optionalCodecFormat.isPresent()) {
@@ -51,7 +51,7 @@ public class CodecFormatServiceImpl implements CodecFormatService {
 
     @Override
     @Transactional
-    public CodecFormatDTO updateCodecFormat(long id, UpdateCodecFormatCommand command) {
+    public CodecFormatDTO updateCodecFormat(Long id, UpdateCodecFormatCommand command) {
         Optional<CodecFormat> optionalCodecFormat = codecFormatRepository.findById(id);
 
         if (optionalCodecFormat.isEmpty()) {
@@ -67,7 +67,7 @@ public class CodecFormatServiceImpl implements CodecFormatService {
     }
 
     @Override
-    public void deleteCodecFormatById(long id) {
+    public void deleteCodecFormatById(Long id) {
         Optional<CodecFormat> optionalCodecFormat = codecFormatRepository.findById(id);
         if (optionalCodecFormat.isPresent()) {
             codecFormatRepository.deleteById(id);

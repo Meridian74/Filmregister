@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface MovieService {
     MovieDTO createMovie(CreateMovieCommand command);
 
-    MovieDTO findMovieById(long id);
+    MovieDTO findMovieById(Long id);
 
     @Transactional
-    MovieDTO updateMovie(long id, UpdateMovieCommand command);
+    MovieDTO updateMovie(Long id, UpdateMovieCommand command);
 
-    void deleteMovieById(long id);
+    void deleteMovieById(Long id);
 
     List<MovieDTO> listAllMovies(Optional<String> prefix);
 }

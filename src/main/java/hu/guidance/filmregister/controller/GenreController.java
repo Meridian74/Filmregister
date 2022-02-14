@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/genre")
-@Tag(name = "Operations of movie Genre records")
+@Tag(name = "Operations of movie's Genre records")
 public class GenreController {
 
     private final GenreService genreService;
@@ -34,14 +34,14 @@ public class GenreController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Find and get a movie genre by ID")
-    public GenreDTO findGenreById(@PathVariable("id") long id) {
+    public GenreDTO findGenreById(@PathVariable("id") Long id) {
         return genreService.findGenreById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating a movie genre with given data founded it by ID number")
     public GenreDTO updateGenre(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateGenreCommand command) {
         return genreService.updateGenre(id, command);
     }
@@ -50,7 +50,7 @@ public class GenreController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a movie genre by ID number")
     @ApiResponse(responseCode = "204", description = "Movie genre has been deleted")
-    public void deleteGenre(@PathVariable("id") long id) {
+    public void deleteGenre(@PathVariable("id") Long id) {
         genreService.deleteGenreById(id);
     }
 

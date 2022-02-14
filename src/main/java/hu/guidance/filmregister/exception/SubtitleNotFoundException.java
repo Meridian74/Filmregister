@@ -7,7 +7,7 @@ import java.net.URI;
 
 public class SubtitleNotFoundException extends AbstractThrowableProblem {
 
-    public SubtitleNotFoundException(long id) {
+    public SubtitleNotFoundException(Long id) {
         super(URI.create("subtitle/subtitle-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface CodecFormatService {
     CodecFormatDTO createCodecFormat(CreateCodecFormatCommand command);
 
-    CodecFormatDTO findCodecFormatById(long id);
+    CodecFormatDTO findCodecFormatById(Long id);
 
     @Transactional
-    CodecFormatDTO updateCodecFormat(long id, UpdateCodecFormatCommand command);
+    CodecFormatDTO updateCodecFormat(Long id, UpdateCodecFormatCommand command);
 
-    void deleteCodecFormatById(long id);
+    void deleteCodecFormatById(Long id);
 
     List<CodecFormatDTO> listAllCodecFormats(Optional<String> prefix);
 }

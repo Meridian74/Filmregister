@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class DirectorDTO {
 
-    private long id;
+    private Long id;
     private String name;
     private LocalDate birthDay;
 }

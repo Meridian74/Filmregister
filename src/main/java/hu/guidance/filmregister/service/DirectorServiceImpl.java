@@ -38,7 +38,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public DirectorDTO findDirectorById(long id) {
+    public DirectorDTO findDirectorById(Long id) {
         Optional<Director> optionalDirector= directorRepository.findById(id);
 
         if (optionalDirector.isPresent()) {
@@ -51,7 +51,7 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     @Transactional
-    public DirectorDTO updateDirector(long id, UpdateDirectorCommand command) {
+    public DirectorDTO updateDirector(Long id, UpdateDirectorCommand command) {
         Optional<Director> optionalDirector = directorRepository.findById(id);
 
         if (optionalDirector.isEmpty()) {
@@ -70,7 +70,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public void deleteDirectorById(long id) {
+    public void deleteDirectorById(Long id) {
         Optional<Director> optionalDirector = directorRepository.findById(id);
         if (optionalDirector.isPresent()) {
             directorRepository.deleteById(id);

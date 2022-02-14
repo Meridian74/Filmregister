@@ -3,10 +3,9 @@ package hu.guidance.filmregister.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.time.Duration;
+import java.time.LocalTime;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateMovieCommand {
@@ -21,30 +20,30 @@ public class CreateMovieCommand {
     private String titleOriginal;
 
     @Schema(description = "Movie length", example = "01:28:31")
-    private Duration duration;
+    private LocalTime duration;
 
     @Schema(description = "ID of Genre", example = "1")
-    private long genreId;
+    private Long genreId;
 
     @Schema(description = "ID of Director", example = "1")
-    private long directorId;
+    private Long directorId;
 
     @Schema(description = "Movie release year", example = "1986")
-    private int releaseYear;
+    private Integer releaseYear;
 
     @Schema(description = "ID of video Codec Format", example = "1")
-    private long codecFormatId;
+    private Long codecFormatId;
 
     @Schema(description = "Screen resolution of with", example = "1280")
-    private int xResolution;
+    private Integer xResolution;
 
     @Schema(description = "Screen resolution of height", example = "720")
-    private int yResolution;
+    private Integer yResolution;
 
     @Schema(description = "ID of Storage Type", example = "1")
-    private long storageTypeId;
+    private Long storageTypeId;
 
     @Schema(description = "Number of the storage", example = "2")
-    private int storageNumber;
+    private Integer storageNumber;
 
 }

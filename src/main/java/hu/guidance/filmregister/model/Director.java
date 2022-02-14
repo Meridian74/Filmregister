@@ -13,13 +13,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "DIRECTOR")
+@Table(name = "DIRECTORS")
 public class Director {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;

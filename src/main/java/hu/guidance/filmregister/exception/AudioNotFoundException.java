@@ -7,7 +7,7 @@ import java.net.URI;
 
 public class AudioNotFoundException extends AbstractThrowableProblem {
 
-    public AudioNotFoundException(long id) {
+    public AudioNotFoundException(Long id) {
         super(URI.create("audio/audio-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

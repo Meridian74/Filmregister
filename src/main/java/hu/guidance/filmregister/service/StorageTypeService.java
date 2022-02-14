@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface StorageTypeService {
     StorageTypeDTO createStorageType(CreateStorageTypeCommand command);
 
-    StorageTypeDTO findStorageTypeById(long id);
+    StorageTypeDTO findStorageTypeById(Long id);
 
     @Transactional
-    StorageTypeDTO updateStorageType(long id, UpdateStorageTypeCommand command);
+    StorageTypeDTO updateStorageType(Long id, UpdateStorageTypeCommand command);
 
-    void deleteStorageTypeById(long id);
+    void deleteStorageTypeById(Long id);
 
     List<StorageTypeDTO> listAllStorageTypes(Optional<String> prefix);
 }

@@ -4,25 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Duration;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDTO {
 
-    private long id;
+    private Long id;
     private String titleHun;
     private String titleEnglish;
     private String titleOriginal;
-    private Duration duration;
-    private long genreId;
-    private long directorId;
-    private int releaseYear;
-    private long codecFormatId;
-    private int xResolution;
-    private int yResolution;
-    private long storageTypeId;
-    private int storageNumber;
+    private LocalTime duration;
+    private Long genreId;
+    private Long directorId;
+    private Integer releaseYear;
+    private Long codecFormatId;
+    private Integer xResolution;
+    private Integer yResolution;
+    private Long storageTypeId;
+    private Integer storageNumber;
 
 }

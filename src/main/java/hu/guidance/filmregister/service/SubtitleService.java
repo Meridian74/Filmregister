@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface SubtitleService {
     SubtitleDTO createSubtitle(CreateSubtitleCommand command);
 
-    SubtitleDTO findSubtitleById(long id);
+    SubtitleDTO findSubtitleById(Long id);
 
     @Transactional
-    SubtitleDTO updateSubtitle(long id, UpdateSubtitleCommand command);
+    SubtitleDTO updateSubtitle(Long id, UpdateSubtitleCommand command);
 
-    void deleteSubtitleById(long id);
+    void deleteSubtitleById(Long id);
 
     List<SubtitleDTO> listAllSubtitles(Optional<String> prefix);
 }

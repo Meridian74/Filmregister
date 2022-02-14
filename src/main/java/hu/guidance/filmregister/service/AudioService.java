@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface AudioService {
     AudioDTO createAudio(CreateAudioCommand command);
 
-    AudioDTO findAudioById(long id);
+    AudioDTO findAudioById(Long id);
 
     @Transactional
-    AudioDTO updateAudio(long id, UpdateAudioCommand command);
+    AudioDTO updateAudio(Long id, UpdateAudioCommand command);
 
-    void deleteAudioById(long id);
+    void deleteAudioById(Long id);
 
     List<AudioDTO> listAllAudios(Optional<String> prefix);
 

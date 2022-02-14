@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Duration;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ import java.time.Duration;
 public class UpdateMovieCommand {
 
     @Schema(description = "ID number to select movie", example = "1")
-    private long id;
+    private Long id;
 
     @Schema(description = "Updated/old hungarian title name", example = "Istenek fegyverzete")
     private String titleHun;
@@ -27,29 +27,29 @@ public class UpdateMovieCommand {
     private String titleOriginal;
 
     @Schema(description = "Updated/old movie length", example = "01:28:31")
-    private Duration duration;
+    private LocalTime duration;
 
     @Schema(description = "Updated/old ID of Genre", example = "1")
-    private long genreId;
+    private Long genreId;
 
     @Schema(description = "Updated/old ID of Director", example = "1")
-    private long directorId;
+    private Long directorId;
 
     @Schema(description = "Updated/old Movie release year", example = "1986")
-    private int releaseYear;
+    private Integer releaseYear;
 
     @Schema(description = "Updated/old ID of video Codec Format", example = "1")
-    private long codecFormatId;
+    private Long codecFormatId;
 
     @Schema(description = "Updated/old Screen resolution of with", example = "1280")
-    private int xResolution;
+    private Integer xResolution;
 
     @Schema(description = "Updated/old Screen resolution of with", example = "720")
-    private int yResolution;
+    private Integer yResolution;
 
     @Schema(description = "Updated/old ID of Storage Type", example = "1")
-    private long storageTypeId;
+    private Long storageTypeId;
 
     @Schema(description = "Updated/old Number of the storage", example = "2")
-    private int storageNumber;
+    private Integer storageNumber;
 }

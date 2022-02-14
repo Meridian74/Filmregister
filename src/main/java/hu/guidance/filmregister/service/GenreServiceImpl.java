@@ -38,7 +38,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public GenreDTO findGenreById(long id) {
+    public GenreDTO findGenreById(Long id) {
         Optional<Genre> optionalGenre = genreRepository.findById(id);
 
         if (optionalGenre.isPresent()) {
@@ -51,7 +51,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     @Transactional
-    public GenreDTO updateGenre(long id, UpdateGenreCommand command) {
+    public GenreDTO updateGenre(Long id, UpdateGenreCommand command) {
         Optional<Genre> optionalGenre = genreRepository.findById(id);
 
         if (optionalGenre.isEmpty()) {
@@ -67,7 +67,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void deleteGenreById(long id) {
+    public void deleteGenreById(Long id) {
         Optional<Genre> optionalGenre = genreRepository.findById(id);
         if (optionalGenre.isPresent()) {
             genreRepository.deleteById(id);

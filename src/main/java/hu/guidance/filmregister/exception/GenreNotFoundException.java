@@ -7,7 +7,7 @@ import java.net.URI;
 
 public class GenreNotFoundException extends AbstractThrowableProblem {
 
-    public GenreNotFoundException(long id) {
+    public GenreNotFoundException(Long id) {
         super(URI.create("genre/genre-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

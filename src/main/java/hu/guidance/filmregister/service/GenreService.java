@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface GenreService {
     GenreDTO createGenre(CreateGenreCommand command);
 
-    GenreDTO findGenreById(long id);
+    GenreDTO findGenreById(Long id);
 
     @Transactional
-    GenreDTO updateGenre(long id, UpdateGenreCommand command);
+    GenreDTO updateGenre(Long id, UpdateGenreCommand command);
 
-    void deleteGenreById(long id);
+    void deleteGenreById(Long id);
 
     List<GenreDTO> listAllGenres(Optional<String> prefix);
 }

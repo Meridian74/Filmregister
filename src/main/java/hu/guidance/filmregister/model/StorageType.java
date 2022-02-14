@@ -12,13 +12,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "STORAGE_TYPE")
+@Table(name = "STORAGE_TYPES")
 public class StorageType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;

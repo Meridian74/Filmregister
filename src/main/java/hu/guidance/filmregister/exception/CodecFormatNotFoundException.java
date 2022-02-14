@@ -7,7 +7,7 @@ import java.net.URI;
 
 public class CodecFormatNotFoundException extends AbstractThrowableProblem {
 
-    public CodecFormatNotFoundException(long id) {
+    public CodecFormatNotFoundException(Long id) {
         super(URI.create("codecformat/codec-format-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

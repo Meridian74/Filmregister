@@ -38,7 +38,7 @@ public class StorageTypeServiceImpl implements StorageTypeService {
     }
 
     @Override
-    public StorageTypeDTO findStorageTypeById(long id) {
+    public StorageTypeDTO findStorageTypeById(Long id) {
         Optional<StorageType> optionalStorageType = storageTypeRepository.findById(id);
 
         if (optionalStorageType.isPresent()) {
@@ -51,7 +51,7 @@ public class StorageTypeServiceImpl implements StorageTypeService {
 
     @Override
     @Transactional
-    public StorageTypeDTO updateStorageType(long id, UpdateStorageTypeCommand command) {
+    public StorageTypeDTO updateStorageType(Long id, UpdateStorageTypeCommand command) {
         Optional<StorageType> optionalStorageType = storageTypeRepository.findById(id);
 
         if (optionalStorageType.isEmpty()) {
@@ -67,7 +67,7 @@ public class StorageTypeServiceImpl implements StorageTypeService {
     }
 
     @Override
-    public void deleteStorageTypeById(long id) {
+    public void deleteStorageTypeById(Long id) {
         Optional<StorageType> optionalStorageType = storageTypeRepository.findById(id);
         if (optionalStorageType.isPresent()) {
             storageTypeRepository.deleteById(id);

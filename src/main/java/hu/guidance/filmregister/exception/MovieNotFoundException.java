@@ -7,7 +7,7 @@ import java.net.URI;
 
 public class MovieNotFoundException extends AbstractThrowableProblem {
 
-    public MovieNotFoundException(long id) {
+    public MovieNotFoundException(Long id) {
         super(URI.create("movie/movie-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

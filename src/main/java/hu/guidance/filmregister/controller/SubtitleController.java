@@ -34,14 +34,14 @@ public class SubtitleController {
 
     @GetMapping("/{id}")
     @Operation(summary = "find and get an subtitle language by its id")
-    public SubtitleDTO findSubtitleById(@PathVariable("id") long id) {
+    public SubtitleDTO findSubtitleById(@PathVariable("id") Long id) {
         return subtitleService.findSubtitleById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating an subtitle language with given data founded it by ID number")
     public SubtitleDTO updateSubtitle(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateSubtitleCommand command) {
         return subtitleService.updateSubtitle(id, command);
     }
@@ -50,7 +50,7 @@ public class SubtitleController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete an subtitle by ID number")
     @ApiResponse(responseCode = "204", description = "Subtitle language has been deleted")
-    public void deleteSubtitle(@PathVariable("id") long id) {
+    public void deleteSubtitle(@PathVariable("id") Long id) {
         subtitleService.deleteSubtitleById(id);
     }
 

@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -47,7 +47,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieDTO findMovieById(long id) {
+    public MovieDTO findMovieById(Long id) {
         Optional<Movie> optionalMovie= movieRepository.findById(id);
 
         if (optionalMovie.isPresent()) {
@@ -60,7 +60,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional
-    public MovieDTO updateMovie(long id, UpdateMovieCommand command) {
+    public MovieDTO updateMovie(Long id, UpdateMovieCommand command) {
         Optional<Movie> optionalMovie = movieRepository.findById(id);
 
         if (optionalMovie.isEmpty()) {
@@ -80,28 +80,28 @@ public class MovieServiceImpl implements MovieService {
         if (command.getDuration() != null) {
             movie.setDuration(command.getDuration());
         }
-        if (command.getGenreId() > 0) {
+        if (command.getGenreId() != null) {
             movie.setGenreId(command.getGenreId());
         }
-        if (command.getDirectorId() > 0) {
+        if (command.getDirectorId()!= null) {
             movie.setDirectorId(command.getDirectorId());
         }
-        if (command.getReleaseYear() > 1894) {
+        if (command.getReleaseYear() != null) {
             movie.setReleaseYear(command.getReleaseYear());
         }
-        if (command.getCodecFormatId() > 0) {
+        if (command.getCodecFormatId() != null) {
             movie.setCodecFormatId(command.getCodecFormatId());
         }
-        if (command.getXResolution() > 0) {
+        if (command.getXResolution() != null) {
             movie.setXResolution(command.getXResolution());
         }
-        if (command.getYResolution() > 0) {
+        if (command.getYResolution() != null) {
             movie.setYResolution(command.getYResolution());
         }
-        if (command.getStorageTypeId() > 0) {
+        if (command.getStorageTypeId() != null) {
             movie.setStorageTypeId(command.getStorageTypeId());
         }
-        if (command.getStorageNumber() > 0) {
+        if (command.getStorageNumber() != null) {
             movie.setStorageNumber(command.getStorageNumber());
         }
 
@@ -109,7 +109,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteMovieById(long id) {
+    public void deleteMovieById(Long id) {
         Optional<Movie> optionalMovie = movieRepository.findById(id);
         if (optionalMovie.isPresent()) {
             movieRepository.deleteById(id);
@@ -122,22 +122,37 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieDTO> listAllMovies(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<MovieDTO>>(){}.getType();
+        List<Movie> allMovies = movieRepository.findAll();
 
-        String word = "";
-        if (prefix.isPresent()){
-            word = prefix.get().toLowerCase();
+        if (prefix.isPresent()) {
+            String keyWord = prefix.get();
+            List<Movie> filteredMovies = filterWithKeyWordInAllTitles(keyWord, allMovies);
+
+            return modelMapper.map(filteredMovies, targetListType);
+
+        } else {
+            return modelMapper.map(allMovies, targetListType);
         }
-        String keyWord = word;
 
-        List<Movie> movie = movieRepository.findAll();
-        List<Movie> filtered = movie.stream()
-                .filter(e -> prefix.isEmpty()
-                        || e.getTitleHun().toLowerCase().contains(keyWord)
-                        || e.getTitleEnglish().toLowerCase().contains(keyWord)
-                        || e.getTitleOriginal().toLowerCase().contains(keyWord))
-                .collect(Collectors.toList());
-
-        return modelMapper.map(filtered, targetListType);
     }
 
+    private List<Movie> filterWithKeyWordInAllTitles(String keyWord, List<Movie> movies) {
+        List<Movie> filtered = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            if (movie.getTitleHun() != null && movie.getTitleHun().contains(keyWord)) {
+                filtered.add(movie);
+                continue;
+            }
+            if (movie.getTitleEnglish() != null && movie.getTitleEnglish().contains(keyWord)) {
+                filtered.add(movie);
+                continue;
+            }
+            if (movie.getTitleOriginal() != null && movie.getTitleOriginal().contains(keyWord)) {
+                filtered.add(movie);
+            }
+        }
+
+        return filtered;
+    }
 }

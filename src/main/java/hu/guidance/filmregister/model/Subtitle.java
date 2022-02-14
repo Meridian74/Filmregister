@@ -17,7 +17,7 @@ public class Subtitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "LANGUAGE")
     private String language;

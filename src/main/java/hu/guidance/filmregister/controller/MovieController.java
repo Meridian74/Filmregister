@@ -34,23 +34,23 @@ public class MovieController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Find and get a movie by its id")
-    public MovieDTO findMovieById(@PathVariable("id") long id) {
+    public MovieDTO findMovieById(@PathVariable("id") Long id) {
         return movieService.findMovieById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating an movie with given data founded it by ID number")
     public MovieDTO updateMovie(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateMovieCommand command) {
         return movieService.updateMovie(id, command);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a movie by ID number")
     @ApiResponse(responseCode = "204", description = "Movie has been deleted")
-    public void deleteMovie(@PathVariable("id") long id) {
+    public void deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovieById(id);
     }
 

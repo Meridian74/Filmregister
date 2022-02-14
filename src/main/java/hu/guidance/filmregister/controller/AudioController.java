@@ -34,14 +34,14 @@ public class AudioController {
 
     @GetMapping("/{id}")
     @Operation(summary = "find and get an audio language by its id")
-    public AudioDTO findAudioById(@PathVariable("id") long id) {
+    public AudioDTO findAudioById(@PathVariable("id") Long id) {
         return audioService.findAudioById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating an audio language with given data founded it by ID number")
     public AudioDTO updateAudio(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateAudioCommand command) {
         return audioService.updateAudio(id, command);
     }
@@ -50,7 +50,7 @@ public class AudioController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete an audio by ID number")
     @ApiResponse(responseCode = "204", description = "Audio language has been deleted")
-    public void deleteAudio(@PathVariable("id") long id) {
+    public void deleteAudio(@PathVariable("id") Long id) {
         audioService.deleteAudioById(id);
     }
 

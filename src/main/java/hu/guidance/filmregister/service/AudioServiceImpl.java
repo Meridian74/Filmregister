@@ -38,7 +38,7 @@ public class AudioServiceImpl implements AudioService {
     }
 
     @Override
-    public AudioDTO findAudioById(long id) {
+    public AudioDTO findAudioById(Long id) {
         Optional<Audio> optionalAudio = audioRepository.findById(id);
 
         if (optionalAudio.isPresent()) {
@@ -51,7 +51,7 @@ public class AudioServiceImpl implements AudioService {
 
     @Override
     @Transactional
-    public AudioDTO updateAudio(long id, UpdateAudioCommand command) {
+    public AudioDTO updateAudio(Long id, UpdateAudioCommand command) {
         Optional<Audio> optionalAudio = audioRepository.findById(id);
 
         if (optionalAudio.isEmpty()) {
@@ -67,7 +67,7 @@ public class AudioServiceImpl implements AudioService {
     }
 
     @Override
-    public void deleteAudioById(long id) {
+    public void deleteAudioById(Long id) {
         Optional<Audio> optionalAudio = audioRepository.findById(id);
         if (optionalAudio.isPresent()) {
             audioRepository.deleteById(id);

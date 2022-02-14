@@ -34,14 +34,14 @@ public class DirectorController {
 
     @GetMapping("/{id}")
     @Operation(summary = "find and get an director language by its id")
-    public DirectorDTO findDirectorById(@PathVariable("id") long id) {
+    public DirectorDTO findDirectorById(@PathVariable("id") Long id) {
         return directorService.findDirectorById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating a movie director with given data founded it by ID number")
     public DirectorDTO updateDirector(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateDirectorCommand command) {
         return directorService.updateDirector(id, command);
     }
@@ -50,7 +50,7 @@ public class DirectorController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a movie director by ID number")
     @ApiResponse(responseCode = "204", description = "Director has been deleted")
-    public void deleteDirector(@PathVariable("id") long id) {
+    public void deleteDirector(@PathVariable("id") Long id) {
         directorService.deleteDirectorById(id);
     }
 

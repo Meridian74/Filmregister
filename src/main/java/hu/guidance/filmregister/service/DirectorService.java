@@ -11,12 +11,12 @@ import java.util.Optional;
 public interface DirectorService {
     DirectorDTO createDirector(CreateDirectorCommand command);
 
-    DirectorDTO findDirectorById(long id);
+    DirectorDTO findDirectorById(Long id);
 
     @Transactional
-    DirectorDTO updateDirector(long id, UpdateDirectorCommand command);
+    DirectorDTO updateDirector(Long id, UpdateDirectorCommand command);
 
-    void deleteDirectorById(long id);
+    void deleteDirectorById(Long id);
 
     List<DirectorDTO> listAllDirectors(Optional<String> prefix);
 }

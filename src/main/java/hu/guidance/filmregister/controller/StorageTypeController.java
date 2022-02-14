@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/storagetype")
-@Tag(name = "Operations of storage type records")
+@Tag(name = "Operations of Storage Type records")
 public class StorageTypeController {
 
     private final StorageTypeService storageTypeService;
@@ -34,14 +34,14 @@ public class StorageTypeController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Find and get a storage type by ID")
-    public StorageTypeDTO findStorageTypeById(@PathVariable("id") long id) {
+    public StorageTypeDTO findStorageTypeById(@PathVariable("id") Long id) {
         return storageTypeService.findStorageTypeById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating a storage type with given data founded it by ID number")
     public StorageTypeDTO updateStorageType(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateStorageTypeCommand command) {
         return storageTypeService.updateStorageType(id, command);
     }
@@ -50,7 +50,7 @@ public class StorageTypeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a storage type by ID number")
     @ApiResponse(responseCode = "204", description = "Movie storageType has been deleted")
-    public void deleteStorageType(@PathVariable("id") long id) {
+    public void deleteStorageType(@PathVariable("id") Long id) {
         storageTypeService.deleteStorageTypeById(id);
     }
 

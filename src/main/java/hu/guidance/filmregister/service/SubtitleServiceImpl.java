@@ -38,7 +38,7 @@ public class SubtitleServiceImpl implements SubtitleService {
     }
 
     @Override
-    public SubtitleDTO findSubtitleById(long id) {
+    public SubtitleDTO findSubtitleById(Long id) {
         Optional<Subtitle> optionalSubtitle = subtitleRepository.findById(id);
 
         if (optionalSubtitle.isPresent()) {
@@ -51,7 +51,7 @@ public class SubtitleServiceImpl implements SubtitleService {
 
     @Override
     @Transactional
-    public SubtitleDTO updateSubtitle(long id, UpdateSubtitleCommand command) {
+    public SubtitleDTO updateSubtitle(Long id, UpdateSubtitleCommand command) {
         Optional<Subtitle> optionalSubtitle = subtitleRepository.findById(id);
 
         if (optionalSubtitle.isEmpty()) {
@@ -67,7 +67,7 @@ public class SubtitleServiceImpl implements SubtitleService {
     }
 
     @Override
-    public void deleteSubtitleById(long id) {
+    public void deleteSubtitleById(Long id) {
         Optional<Subtitle> optionalSubtitle = subtitleRepository.findById(id);
         if (optionalSubtitle.isPresent()) {
             subtitleRepository.deleteById(id);

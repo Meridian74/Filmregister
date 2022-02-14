@@ -6,7 +6,7 @@ import org.zalando.problem.Status;
 import java.net.URI;
 
 public class StorageTypeNotFoundException extends AbstractThrowableProblem {
-    public StorageTypeNotFoundException(long id) {
+    public StorageTypeNotFoundException(Long id) {
         super(URI.create("storagetype/storage-type-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,

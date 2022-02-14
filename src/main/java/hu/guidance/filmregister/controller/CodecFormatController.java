@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/codecformat")
-@Tag(name = "Operations of Codec Format records")
+@Tag(name = "Operations of video Codec Format records")
 public class CodecFormatController {
 
     private final CodecFormatService codecFormatService;
@@ -35,14 +35,14 @@ public class CodecFormatController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Find and get a video codec format by its id")
-    public CodecFormatDTO findCodecFormatById(@PathVariable("id") long id) {
+    public CodecFormatDTO findCodecFormatById(@PathVariable("id") Long id) {
         return codecFormatService.findCodecFormatById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating a video codec format with given data founded it by ID number")
     public CodecFormatDTO updateCodecFormat(
-            @PathVariable("id") long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateCodecFormatCommand command) {
         return codecFormatService.updateCodecFormat(id, command);
     }
@@ -51,7 +51,7 @@ public class CodecFormatController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a video codec format by ID number")
     @ApiResponse(responseCode = "204", description = "CodecFormat language has been deleted")
-    public void deleteCodecFormat(@PathVariable("id") long id) {
+    public void deleteCodecFormat(@PathVariable("id") Long id) {
         codecFormatService.deleteCodecFormatById(id);
     }
 

@@ -6,7 +6,7 @@ import org.zalando.problem.Status;
 import java.net.URI;
 
 public class DirectorNotFoundException extends AbstractThrowableProblem {
-    public DirectorNotFoundException(long id) {
+    public DirectorNotFoundException(Long id) {
         super(URI.create("director/director-not-found"),
                 "Not found!",
                 Status.NOT_FOUND,
