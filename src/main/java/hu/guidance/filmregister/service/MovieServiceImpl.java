@@ -123,12 +123,18 @@ public class MovieServiceImpl implements MovieService {
     public List<MovieDTO> listAllMovies(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<MovieDTO>>(){}.getType();
 
+        String word = "";
+        if (prefix.isPresent()){
+            word = prefix.get().toLowerCase();
+        }
+        String keyWord = word;
+
         List<Movie> movie = movieRepository.findAll();
         List<Movie> filtered = movie.stream()
                 .filter(e -> prefix.isEmpty()
-                        || e.getTitleHun().toLowerCase().contains(prefix.get().toLowerCase())
-                        || e.getTitleEnglish().toLowerCase().contains(prefix.get().toLowerCase())
-                        || e.getTitleOriginal().toLowerCase().contains(prefix.get().toLowerCase()))
+                        || e.getTitleHun().toLowerCase().contains(keyWord)
+                        || e.getTitleEnglish().toLowerCase().contains(keyWord)
+                        || e.getTitleOriginal().toLowerCase().contains(keyWord))
                 .collect(Collectors.toList());
 
         return modelMapper.map(filtered, targetListType);
