@@ -1,9 +1,14 @@
 package hu.guidance.filmregister.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 import java.time.Duration;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateMovieCommand {
 
     @Schema(description = "Hungarian title name", example = "Istenek fegyverzete")
