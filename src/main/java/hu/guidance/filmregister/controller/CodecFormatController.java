@@ -9,9 +9,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +30,7 @@ public class CodecFormatController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Creates a new video codec format.")
     @ApiResponse(responseCode = "201", description = "Video codec format has been created.")
-    public CodecFormatDTO createCodecFormat(@Validated @RequestBody CreateCodecFormatCommand command) {
+    public CodecFormatDTO createCodecFormat(@Valid @RequestBody CreateCodecFormatCommand command) {
         return codecFormatService.createCodecFormat(command);
     }
 
@@ -43,7 +43,7 @@ public class CodecFormatController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating a video codec format with given data founded it by ID number")
     public CodecFormatDTO updateCodecFormat(
-            @Validated
+            @Valid
             @PathVariable("id") Long id,
             @RequestBody UpdateCodecFormatCommand command) {
         return codecFormatService.updateCodecFormat(id, command);

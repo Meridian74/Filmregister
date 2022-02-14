@@ -8,9 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class GenreController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie genre")
     @ApiResponse(responseCode = "201", description = "Movie genre has been created")
-    public GenreDTO createGenre(@Validated @RequestBody CreateGenreCommand command) {
+    public GenreDTO createGenre(@Valid @RequestBody CreateGenreCommand command) {
         return genreService.createGenre(command);
     }
 
@@ -42,7 +42,7 @@ public class GenreController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating a movie genre with given data founded it by ID number")
     public GenreDTO updateGenre(
-            @Validated
+            @Valid
             @PathVariable("id") Long id,
             @RequestBody UpdateGenreCommand command) {
         return genreService.updateGenre(id, command);

@@ -8,9 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class MovieController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie")
     @ApiResponse(responseCode = "201", description = "Movie has been created")
-    public MovieDTO createMovie(@Validated @RequestBody CreateMovieCommand command) {
+    public MovieDTO createMovie(@Valid @RequestBody CreateMovieCommand command) {
         return movieService.createMovie(command);
     }
 
@@ -42,7 +42,7 @@ public class MovieController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating an movie with given data founded it by ID number")
     public MovieDTO updateMovie(
-            @Validated
+            @Valid
             @PathVariable("id") Long id,
             @RequestBody UpdateMovieCommand command) {
         return movieService.updateMovie(id, command);

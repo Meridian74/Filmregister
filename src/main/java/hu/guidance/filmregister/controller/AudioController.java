@@ -8,9 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class AudioController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new audio language.")
     @ApiResponse(responseCode = "201", description = "Audio language has been created.")
-    public AudioDTO createAudio(@Validated @RequestBody CreateAudioCommand command) {
+    public AudioDTO createAudio(@Valid @RequestBody CreateAudioCommand command) {
         return audioService.createAudio(command);
     }
 
@@ -42,7 +42,7 @@ public class AudioController {
     @PutMapping("/{id}")
     @Operation(summary = "Updating an audio language with given data founded it by ID number")
     public AudioDTO updateAudio(
-            @Validated
+            @Valid
             @PathVariable("id") Long id,
             @RequestBody UpdateAudioCommand command) {
         return audioService.updateAudio(id, command);
