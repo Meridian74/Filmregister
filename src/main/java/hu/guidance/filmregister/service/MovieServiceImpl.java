@@ -37,6 +37,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     private void setNewMovieData(CreateMovieCommand command, Movie movie) {
+        checkThreeTitlesAreEmpty(command.getTitleHun(),
+                command.getTitleEnglish(),
+                command.getTitleOriginal());
+
         movie.setTitleHun(command.getTitleHun());
         movie.setTitleEnglish(command.getTitleEnglish());
         movie.setTitleOriginal(command.getTitleOriginal());
@@ -73,7 +77,7 @@ public class MovieServiceImpl implements MovieService {
         }
 
         Movie movie = optionalMovie.get();
-        setMovieTitlesWithConstraint(movie, command);
+        setMovieTitles(movie, command);
         setMovieOtherData(movie, command);
 
         return modelMapper.map(movie, MovieDTO.class);
@@ -109,13 +113,10 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
-    private void setMovieTitlesWithConstraint(Movie movie, UpdateMovieCommand command) {
-        if (command.getTitleHun() == null &&
-                command.getTitleEnglish() == null &&
-                command.getTitleOriginal() == null) {
-
-            throw new MovieAllTitlesAreEmptyException(command.getId());
-        }
+    private void setMovieTitles(Movie movie, UpdateMovieCommand command) {
+        checkThreeTitlesAreEmpty(command.getTitleHun(),
+                command.getTitleEnglish(),
+                command.getTitleOriginal());
 
         if (command.getTitleHun() != null && !command.getTitleHun().equals("") ) {
             movie.setTitleHun(command.getTitleHun());
@@ -127,6 +128,15 @@ public class MovieServiceImpl implements MovieService {
             movie.setTitleOriginal(command.getTitleOriginal());
         }
 
+    }
+
+    private void checkThreeTitlesAreEmpty(String hunTitle, String englishTitle, String originalTitle) {
+        if (hunTitle == null &&
+                englishTitle == null &&
+                originalTitle == null) {
+
+            throw new MovieAllTitlesAreEmptyException("All titles can not be empty!");
+        }
     }
 
     @Override
