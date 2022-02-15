@@ -114,28 +114,30 @@ public class MovieServiceImpl implements MovieService {
     }
 
     private void setMovieTitles(Movie movie, UpdateMovieCommand command) {
-        checkThreeTitlesAreEmpty(command.getTitleHun(),
-                command.getTitleEnglish(),
-                command.getTitleOriginal());
+        String hunTitle = command.getTitleHun();
+        String englishTitle = command.getTitleEnglish();
+        String originalTitle = command.getTitleOriginal();
+        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
 
-        if (command.getTitleHun() != null && !command.getTitleHun().equals("") ) {
+        if (!hunTitle.isEmpty() || !hunTitle.isBlank() ) {
             movie.setTitleHun(command.getTitleHun());
         }
-        if (command.getTitleEnglish() != null  && !command.getTitleEnglish().equals("")) {
+        if (!englishTitle.isEmpty() || !englishTitle.isBlank()) {
             movie.setTitleEnglish(command.getTitleEnglish());
         }
-        if (command.getTitleOriginal() != null  && !command.getTitleOriginal().equals("")) {
+        if (!originalTitle.isEmpty() || !originalTitle.isBlank()) {
             movie.setTitleOriginal(command.getTitleOriginal());
         }
 
     }
 
     private void checkThreeTitlesAreEmpty(String hunTitle, String englishTitle, String originalTitle) {
-        if (hunTitle == null &&
-                englishTitle == null &&
-                originalTitle == null) {
+        boolean hungarian = hunTitle.isEmpty() || hunTitle.isBlank();
+        boolean english = englishTitle.isEmpty() || englishTitle.isBlank();
+        boolean original = originalTitle.isEmpty() || originalTitle.isBlank();
 
-            throw new MovieAllTitlesAreEmptyException("All titles can not be empty!");
+        if (hungarian && english && original) {
+            throw new MovieAllTitlesAreEmptyException("All titles can not be empty or blank!");
         }
     }
 
@@ -188,4 +190,36 @@ public class MovieServiceImpl implements MovieService {
 
         return filtered;
     }
+
+    @Override
+    @Transactional
+    public MovieDTO deleteMovieTitleByType(Long id, String titleType) {
+        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        if (optionalMovie.isEmpty()) {
+            throw new MovieNotFoundException(id);
+        }
+
+        Movie movie = optionalMovie.get();
+        switch (titleType) {
+            case "hungarian":
+                movie.setTitleHun(null);
+                break;
+            case "english":
+                movie.setTitleEnglish(null);
+                break;
+            case "original":
+                movie.setTitleOriginal(null);
+                break;
+            default:
+                break;
+        }
+
+        String hunTitle = movie.getTitleHun();
+        String englishTitle = movie.getTitleEnglish();
+        String originalTitle = movie.getTitleOriginal();
+        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
+
+        return modelMapper.map(movie, MovieDTO.class);
+    }
+
 }

@@ -19,4 +19,6 @@ public interface MovieService {
     void deleteMovieById(Long id);
 
     List<MovieDTO> listAllMovies(Optional<String> prefix);
+
+    MovieDTO deleteMovieTitleByType(Long movieId, String titleType);
 }
