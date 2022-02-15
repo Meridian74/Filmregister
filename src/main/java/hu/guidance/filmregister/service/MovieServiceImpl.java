@@ -117,18 +117,21 @@ public class MovieServiceImpl implements MovieService {
         String hunTitle = command.getTitleHun();
         String englishTitle = command.getTitleEnglish();
         String originalTitle = command.getTitleOriginal();
-        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
 
         if (!hunTitle.isEmpty() || !hunTitle.isBlank() ) {
             movie.setTitleHun(command.getTitleHun());
+            hunTitle = movie.getTitleHun();
         }
         if (!englishTitle.isEmpty() || !englishTitle.isBlank()) {
             movie.setTitleEnglish(command.getTitleEnglish());
+            englishTitle = movie.getTitleEnglish();
         }
         if (!originalTitle.isEmpty() || !originalTitle.isBlank()) {
             movie.setTitleOriginal(command.getTitleOriginal());
+            originalTitle = movie.getTitleOriginal();
         }
 
+        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
     }
 
     private void checkThreeTitlesAreEmpty(String hunTitle, String englishTitle, String originalTitle) {
