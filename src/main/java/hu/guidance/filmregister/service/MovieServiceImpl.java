@@ -30,6 +30,13 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public MovieDTO createMovie(CreateMovieCommand command) {
         Movie movie = new Movie();
+        setNewMovieData(command, movie);
+
+        movie = movieRepository.save(movie);
+        return modelMapper.map(movie, MovieDTO.class);
+    }
+
+    private void setNewMovieData(CreateMovieCommand command, Movie movie) {
         movie.setTitleHun(command.getTitleHun());
         movie.setTitleEnglish(command.getTitleEnglish());
         movie.setTitleOriginal(command.getTitleOriginal());
@@ -42,9 +49,6 @@ public class MovieServiceImpl implements MovieService {
         movie.setYResolution(command.getYResolution());
         movie.setStorageTypeId(command.getStorageTypeId());
         movie.setStorageNumber(command.getStorageNumber());
-
-        movie = movieRepository.save(movie);
-        return modelMapper.map(movie, MovieDTO.class);
     }
 
     @Override
