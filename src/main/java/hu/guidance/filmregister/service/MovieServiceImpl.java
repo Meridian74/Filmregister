@@ -3,6 +3,7 @@ package hu.guidance.filmregister.service;
 import hu.guidance.filmregister.dto.CreateMovieCommand;
 import hu.guidance.filmregister.dto.MovieDTO;
 import hu.guidance.filmregister.dto.UpdateMovieCommand;
+import hu.guidance.filmregister.exception.MovieAllTitlesAreEmptyException;
 import hu.guidance.filmregister.exception.MovieNotFoundException;
 import hu.guidance.filmregister.model.Movie;
 import hu.guidance.filmregister.repository.MovieRepository;
@@ -68,15 +69,13 @@ public class MovieServiceImpl implements MovieService {
         }
 
         Movie movie = optionalMovie.get();
-        if (command.getTitleHun() != null && !command.getTitleHun().equals("") ) {
-            movie.setTitleHun(command.getTitleHun());
-        }
-        if (command.getTitleEnglish() != null  && !command.getTitleEnglish().equals("")) {
-            movie.setTitleEnglish(command.getTitleEnglish());
-        }
-        if (command.getTitleOriginal() != null  && !command.getTitleOriginal().equals("")) {
-            movie.setTitleOriginal(command.getTitleOriginal());
-        }
+        setMovieTitlesWithConstraint(movie, command);
+        setMovieOtherData(movie, command);
+
+        return modelMapper.map(movie, MovieDTO.class);
+    }
+
+    private void setMovieOtherData(Movie movie, UpdateMovieCommand command) {
         if (command.getDuration() != null) {
             movie.setDuration(command.getDuration());
         }
@@ -104,8 +103,26 @@ public class MovieServiceImpl implements MovieService {
         if (command.getStorageNumber() != null) {
             movie.setStorageNumber(command.getStorageNumber());
         }
+    }
 
-        return modelMapper.map(movie, MovieDTO.class);
+    private void setMovieTitlesWithConstraint(Movie movie, UpdateMovieCommand command) {
+        if (command.getTitleHun() == null &&
+                command.getTitleEnglish() == null &&
+                command.getTitleOriginal() == null) {
+
+            throw new MovieAllTitlesAreEmptyException(command.getId());
+        }
+
+        if (command.getTitleHun() != null && !command.getTitleHun().equals("") ) {
+            movie.setTitleHun(command.getTitleHun());
+        }
+        if (command.getTitleEnglish() != null  && !command.getTitleEnglish().equals("")) {
+            movie.setTitleEnglish(command.getTitleEnglish());
+        }
+        if (command.getTitleOriginal() != null  && !command.getTitleOriginal().equals("")) {
+            movie.setTitleOriginal(command.getTitleOriginal());
+        }
+
     }
 
     @Override
@@ -117,6 +134,7 @@ public class MovieServiceImpl implements MovieService {
         else {
             throw new MovieNotFoundException(id);
         }
+
     }
 
     @Override
@@ -140,15 +158,16 @@ public class MovieServiceImpl implements MovieService {
         List<Movie> filtered = new ArrayList<>();
 
         for (Movie movie : movies) {
-            if (movie.getTitleHun() != null && movie.getTitleHun().contains(keyWord)) {
-                filtered.add(movie);
-                continue;
-            }
-            if (movie.getTitleEnglish() != null && movie.getTitleEnglish().contains(keyWord)) {
-                filtered.add(movie);
-                continue;
-            }
-            if (movie.getTitleOriginal() != null && movie.getTitleOriginal().contains(keyWord)) {
+            boolean hungarianTitleHit = movie.getTitleHun() != null &&
+                    movie.getTitleHun().contains(keyWord);
+
+            boolean englishTitleHit = movie.getTitleEnglish() != null &&
+                    movie.getTitleEnglish().contains(keyWord);
+
+            boolean originalTitleHit = movie.getTitleOriginal() != null &&
+                    movie.getTitleOriginal().contains(keyWord);
+
+            if(hungarianTitleHit || englishTitleHit || originalTitleHit) {
                 filtered.add(movie);
             }
         }
