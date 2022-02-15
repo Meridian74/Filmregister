@@ -1,11 +1,13 @@
 package hu.guidance.filmregister.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,5 +24,10 @@ public class CodecFormat {
 
     @Column(name = "NAME")
     private String name;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "codecFormat", orphanRemoval = false,
+            fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<Movie> movies;
 
 }

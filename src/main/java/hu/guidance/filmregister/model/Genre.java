@@ -1,8 +1,10 @@
 package hu.guidance.filmregister.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -19,5 +21,10 @@ public class Genre {
 
     @Column(name = "NAME")
     private String name;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "genre", orphanRemoval = false,
+            fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<Movie> movies;
 
 }

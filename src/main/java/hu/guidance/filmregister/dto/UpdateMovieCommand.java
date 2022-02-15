@@ -1,5 +1,9 @@
 package hu.guidance.filmregister.dto;
 
+import hu.guidance.filmregister.model.CodecFormat;
+import hu.guidance.filmregister.model.Director;
+import hu.guidance.filmregister.model.Genre;
+import hu.guidance.filmregister.model.StorageType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,17 +33,8 @@ public class UpdateMovieCommand {
     @Schema(description = "Updated/old movie length", example = "01:28:31")
     private LocalTime duration;
 
-    @Schema(description = "Updated/old ID of Genre", example = "1")
-    private Long genreId;
-
-    @Schema(description = "Updated/old ID of Director", example = "1")
-    private Long directorId;
-
     @Schema(description = "Updated/old Movie release year", example = "1986")
     private Integer releaseYear;
-
-    @Schema(description = "Updated/old ID of video Codec Format", example = "1")
-    private Long codecFormatId;
 
     @Schema(description = "Updated/old Screen resolution of with", example = "1280")
     private Integer xResolution;
@@ -47,9 +42,15 @@ public class UpdateMovieCommand {
     @Schema(description = "Updated/old Screen resolution of with", example = "720")
     private Integer yResolution;
 
-    @Schema(description = "Updated/old ID of Storage Type", example = "1")
-    private Long storageTypeId;
-
     @Schema(description = "Updated/old Number of the storage", example = "2")
     private Integer storageNumber;
+
+    private Genre genre;
+
+    private Director director;
+
+    private CodecFormat codecFormat;
+
+    private StorageType storageType;
+
 }

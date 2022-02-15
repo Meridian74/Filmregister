@@ -45,14 +45,14 @@ public class MovieServiceImpl implements MovieService {
         movie.setTitleEnglish(command.getTitleEnglish());
         movie.setTitleOriginal(command.getTitleOriginal());
         movie.setDuration(command.getDuration());
-        movie.setGenreId(command.getGenreId());
-        movie.setDirectorId(command.getDirectorId());
         movie.setReleaseYear(command.getReleaseYear());
-        movie.setCodecFormatId(command.getCodecFormatId());
         movie.setXResolution(command.getXResolution());
         movie.setYResolution(command.getYResolution());
-        movie.setStorageTypeId(command.getStorageTypeId());
+        movie.setGenre(command.getGenre());
+        movie.setDirector(command.getDirector());
         movie.setStorageNumber(command.getStorageNumber());
+        movie.setCodecFormat(command.getCodecFormat());
+        movie.setStorageType(command.getStorageType());
     }
 
     @Override
@@ -87,17 +87,8 @@ public class MovieServiceImpl implements MovieService {
         if (command.getDuration() != null) {
             movie.setDuration(command.getDuration());
         }
-        if (command.getGenreId() != null) {
-            movie.setGenreId(command.getGenreId());
-        }
-        if (command.getDirectorId()!= null) {
-            movie.setDirectorId(command.getDirectorId());
-        }
         if (command.getReleaseYear() != null) {
             movie.setReleaseYear(command.getReleaseYear());
-        }
-        if (command.getCodecFormatId() != null) {
-            movie.setCodecFormatId(command.getCodecFormatId());
         }
         if (command.getXResolution() != null) {
             movie.setXResolution(command.getXResolution());
@@ -105,11 +96,20 @@ public class MovieServiceImpl implements MovieService {
         if (command.getYResolution() != null) {
             movie.setYResolution(command.getYResolution());
         }
-        if (command.getStorageTypeId() != null) {
-            movie.setStorageTypeId(command.getStorageTypeId());
-        }
         if (command.getStorageNumber() != null) {
             movie.setStorageNumber(command.getStorageNumber());
+        }
+        if (command.getGenre() != null) {
+            movie.setGenre(command.getGenre());
+        }
+        if (command.getDirector()!= null) {
+            movie.setDirector(command.getDirector());
+        }
+        if (command.getStorageType() != null) {
+            movie.setStorageType(command.getStorageType());
+        }
+        if (command.getCodecFormat() != null) {
+            movie.setCodecFormat(command.getCodecFormat());
         }
     }
 

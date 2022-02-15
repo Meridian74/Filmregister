@@ -32,17 +32,8 @@ public class Movie {
     @JsonFormat(pattern="HH:mm:ss")
     private LocalTime duration;
 
-    @Column(name = "GENRE_ID")
-    private Long genreId;
-
-    @Column(name = "DIRECTOR_ID")
-    private Long directorId;
-
     @Column(name = "RELEASE_YEAR")
     private Integer releaseYear;
-
-    @Column(name = "CODEC_FORMAT_ID")
-    private Long codecFormatId;
 
     @Column(name = "X_RESOLUTION")
     private Integer xResolution;
@@ -50,10 +41,19 @@ public class Movie {
     @Column(name = "Y_RESOLUTION")
     private Integer yResolution;
 
-    @Column(name = "STORAGE_TYPE_ID")
-    private Long storageTypeId;
-
     @Column(name = "STORAGE_NUMBER")
     private Integer storageNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Genre genre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Director director;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CodecFormat codecFormat;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private StorageType storageType;
 
 }
