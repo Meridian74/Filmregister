@@ -1,6 +1,6 @@
 package hu.guidance.filmregister.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +25,8 @@ public class CodecFormat {
     @Column(name = "NAME")
     private String name;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "codecFormat", orphanRemoval = false,
-            fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "codecFormat", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Movie> movies;
 
 }

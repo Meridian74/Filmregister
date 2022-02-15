@@ -1,6 +1,6 @@
 package hu.guidance.filmregister.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,9 +22,8 @@ public class Genre {
     @Column(name = "NAME")
     private String name;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "genre", orphanRemoval = false,
-            fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Movie> movies;
 
 }

@@ -44,16 +44,16 @@ public class Movie {
     @Column(name = "STORAGE_NUMBER")
     private Integer storageNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Genre genre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Director director;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private CodecFormat codecFormat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private StorageType storageType;
 
 }

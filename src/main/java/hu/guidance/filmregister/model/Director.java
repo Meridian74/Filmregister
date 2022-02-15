@@ -1,6 +1,6 @@
 package hu.guidance.filmregister.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +29,8 @@ public class Director {
     @Column(name = "BIRTHDAY")
     private LocalDate birthDay;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "director", orphanRemoval = false,
-            fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "director", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Movie> movies;
 
 }
