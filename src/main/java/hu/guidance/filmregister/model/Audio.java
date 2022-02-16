@@ -3,6 +3,8 @@ package hu.guidance.filmregister.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -19,5 +21,8 @@ public class Audio {
 
     @Column(name = "LANGUAGE")
     private String language;
+
+    @ManyToMany(mappedBy = "audios")
+    private Set<Movie> movies = new HashSet<>();
 
 }

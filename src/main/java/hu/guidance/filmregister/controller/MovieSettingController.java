@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 
 @RestController
@@ -70,18 +71,14 @@ public class MovieSettingController {
             @PathVariable("id") Long movieId,
             @RequestBody GenreDTO genreDto) {
 
-        // check data existing
         MovieDTO movieDto = movieService.findMovieById(movieId);
         genreDto = genreService.findGenreById(genreDto.getId());
 
-        // create updater command
         Genre genre = modelMapper.map(genreDto, Genre.class);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
 
-        // update command data
         command.setGenre(genre);
 
-        // commit into database
         return movieService.updateMovie(movieId, command);
     }
 
@@ -91,18 +88,14 @@ public class MovieSettingController {
             @PathVariable("id") Long movieId,
             @RequestBody CodecFormatDTO codecFormatDto) {
 
-        // check data existing
         MovieDTO movieDto = movieService.findMovieById(movieId);
         codecFormatDto = codecFormatService.findCodecFormatById(codecFormatDto.getId());
 
-        // create updater command
         CodecFormat codecFormat = modelMapper.map(codecFormatDto, CodecFormat.class);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
 
-        // update command data
         command.setCodecFormat(codecFormat);
 
-        // commit into database
         return movieService.updateMovie(movieId, command);
     }
 
@@ -112,18 +105,14 @@ public class MovieSettingController {
             @PathVariable("id") Long movieId,
             @RequestBody StorageTypeDTO storageTypeDto) {
 
-        // check data existing
         MovieDTO movieDto = movieService.findMovieById(movieId);
         storageTypeDto = storageTypeService.findStorageTypeById(storageTypeDto.getId());
 
-        // create updater command
         StorageType storageType = modelMapper.map(storageTypeDto, StorageType.class);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
 
-        // update command data
         command.setStorageType(storageType);
 
-        // commit into database
         return movieService.updateMovie(movieId, command);
     }
 
@@ -203,6 +192,24 @@ public class MovieSettingController {
             @RequestParam String titleType) {
 
         return movieService.deleteMovieTitleByType(movieId, titleType.toLowerCase());
+    }
+
+    @PutMapping("/add-audios/{id}")
+    @Operation(summary = "Add audio langue(s) into the movie")
+    public MovieDTO addAudio(
+            @PathVariable("id") Long movieId,
+            @RequestBody List<AudioDTO> audioDtos) {
+
+        return movieService.addAudioIntoMovie(movieId, audioDtos);
+    }
+
+    @PutMapping("/add-subtitles/{id}")
+    @Operation(summary = "Add subtitle langue(s) into the movie")
+    public MovieDTO addSubtitle(
+            @PathVariable("id") Long movieId,
+            @RequestBody List<SubtitleDTO> subtitleDtos) {
+
+        return movieService.addSubtitleIntoMovie(movieId, subtitleDtos);
     }
 
 }

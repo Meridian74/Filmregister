@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -21,5 +23,8 @@ public class Subtitle {
 
     @Column(name = "LANGUAGE")
     private String language;
+
+    @ManyToMany(mappedBy = "subtitles")
+    private Set<Movie> movies = new HashSet<>();
 
 }

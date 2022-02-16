@@ -1,12 +1,16 @@
 package hu.guidance.filmregister.service;
 
-import hu.guidance.filmregister.dto.CreateMovieCommand;
-import hu.guidance.filmregister.dto.MovieDTO;
-import hu.guidance.filmregister.dto.UpdateMovieCommand;
+import hu.guidance.filmregister.dto.*;
+import hu.guidance.filmregister.exception.AudioNotFoundException;
 import hu.guidance.filmregister.exception.MovieAllTitlesAreEmptyException;
 import hu.guidance.filmregister.exception.MovieNotFoundException;
+import hu.guidance.filmregister.exception.SubtitleNotFoundException;
+import hu.guidance.filmregister.model.Audio;
 import hu.guidance.filmregister.model.Movie;
+import hu.guidance.filmregister.model.Subtitle;
+import hu.guidance.filmregister.repository.AudioRepository;
 import hu.guidance.filmregister.repository.MovieRepository;
+import hu.guidance.filmregister.repository.SubtitleRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -21,12 +25,20 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
+    private final AudioRepository audioRepository;
+    private final SubtitleRepository subtitleRepository;
     private final ModelMapper modelMapper;
 
-    public MovieServiceImpl(MovieRepository movieRepository, ModelMapper modelMapper) {
+    public MovieServiceImpl(MovieRepository movieRepository,
+                            AudioRepository audioRepository,
+                            SubtitleRepository subtitleRepository,
+                            ModelMapper modelMapper) {
         this.movieRepository = movieRepository;
+        this.audioRepository = audioRepository;
+        this.subtitleRepository = subtitleRepository;
         this.modelMapper = modelMapper;
     }
+
     @Override
     public MovieDTO createMovie(CreateMovieCommand command) {
         Movie movie = new Movie();
@@ -225,4 +237,51 @@ public class MovieServiceImpl implements MovieService {
         return modelMapper.map(movie, MovieDTO.class);
     }
 
+    @Transactional
+    @Override
+    public MovieDTO addAudioIntoMovie(Long movieId, List<AudioDTO> audioDtos) {
+
+        Optional<Movie> optionalMovie= movieRepository.findById(movieId);
+        if (optionalMovie.isPresent()) {
+            Movie movie = optionalMovie.get();
+            for (AudioDTO audioDto: audioDtos) {
+
+                Optional<Audio> audioOptional = audioRepository.findById(audioDto.getId());
+                if(audioOptional.isPresent()) {
+                    Audio audio = audioOptional.get();
+                    movie.addAudio(audio);
+                } else {
+                    throw new AudioNotFoundException(audioDto.getId());
+                }
+            }
+
+            return modelMapper.map(movie, MovieDTO.class);
+        } else {
+            throw new MovieNotFoundException(movieId);
+        }
+    }
+
+    @Transactional
+    @Override
+    public MovieDTO addSubtitleIntoMovie(Long movieId, List<SubtitleDTO> subtitleDtos) {
+
+        Optional<Movie> optionalMovie= movieRepository.findById(movieId);
+        if (optionalMovie.isPresent()) {
+            Movie movie = optionalMovie.get();
+            for (SubtitleDTO subtitleDto: subtitleDtos) {
+
+                Optional<Subtitle> subtitleOptional = subtitleRepository.findById(subtitleDto.getId());
+                if(subtitleOptional.isPresent()) {
+                    Subtitle subtitle = subtitleOptional.get();
+                    movie.addSubtitle(subtitle);
+                } else {
+                    throw new SubtitleNotFoundException(subtitleDto.getId());
+                }
+            }
+
+            return modelMapper.map(movie, MovieDTO.class);
+        } else {
+            throw new MovieNotFoundException(movieId);
+        }
+    }
 }

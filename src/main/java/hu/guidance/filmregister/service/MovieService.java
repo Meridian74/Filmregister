@@ -1,8 +1,6 @@
 package hu.guidance.filmregister.service;
 
-import hu.guidance.filmregister.dto.CreateMovieCommand;
-import hu.guidance.filmregister.dto.MovieDTO;
-import hu.guidance.filmregister.dto.UpdateMovieCommand;
+import hu.guidance.filmregister.dto.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -21,4 +19,8 @@ public interface MovieService {
     List<MovieDTO> listAllMovies(Optional<String> prefix);
 
     MovieDTO deleteMovieTitleByType(Long movieId, String titleType);
+
+    MovieDTO addAudioIntoMovie(Long movieId, List<AudioDTO> audioDtos);
+
+    MovieDTO addSubtitleIntoMovie(Long movieId, List<SubtitleDTO> subtitleDtos);
 }

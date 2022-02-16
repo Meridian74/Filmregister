@@ -1,9 +1,6 @@
 package hu.guidance.filmregister.dto;
 
-import hu.guidance.filmregister.model.CodecFormat;
-import hu.guidance.filmregister.model.Director;
-import hu.guidance.filmregister.model.Genre;
-import hu.guidance.filmregister.model.StorageType;
+import hu.guidance.filmregister.model.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -52,5 +51,7 @@ public class UpdateMovieCommand {
     private CodecFormat codecFormat;
 
     private StorageType storageType;
+
+    private Set<Audio> audios = new HashSet<>();
 
 }

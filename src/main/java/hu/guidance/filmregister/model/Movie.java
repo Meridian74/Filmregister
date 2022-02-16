@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -45,15 +47,35 @@ public class Movie {
     private Integer storageNumber;
 
     @ManyToOne
+    @JoinColumn(name = "GENRE_ID")
     private Genre genre;
 
     @ManyToOne
+    @JoinColumn(name = "DIRECTOR_ID")
     private Director director;
 
     @ManyToOne
+    @JoinColumn(name = "CODEC_FORMAT_ID")
     private CodecFormat codecFormat;
 
     @ManyToOne
+    @JoinColumn(name = "STORAGE_TYPE_ID")
     private StorageType storageType;
+
+    @ManyToMany
+    private Set<Audio> audios = new HashSet<>();
+
+    @ManyToMany
+    private Set<Subtitle> subtitles = new HashSet<>();
+
+    public void addAudio(Audio audio) {
+        audios.add(audio);
+        audio.getMovies().add(this);
+    }
+
+    public void addSubtitle(Subtitle subtitle) {
+        subtitles.add(subtitle);
+        subtitle.getMovies().add(this);
+    }
 
 }
