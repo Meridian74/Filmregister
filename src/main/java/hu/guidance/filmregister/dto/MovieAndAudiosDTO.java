@@ -15,9 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class MovieAndAudiosDTO {
 
-    @Schema(description = "ID of the movie", example = "1")
-    private Long id;
-
     @Schema(description = "Hungarian title of the movie", example = "Robin Hood, a fuszeklik fejedelme")
     private String titleHun;
 

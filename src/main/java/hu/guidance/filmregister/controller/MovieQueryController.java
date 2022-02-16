@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/movie/query")
-@Tag(name = "Setting of the movie's properties")
+@Tag(name = "Query movie's properties")
 public class MovieQueryController {
 
     private final MovieService movieService;

@@ -15,9 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class MovieAndSubtitlesDTO {
 
-    @Schema(description = "ID of the movie", example = "1")
-    private Long id;
-
     @Schema(description = "Hungarian title of the movie", example = "Robin Hood, a fuszeklik fejedelme")
     private String titleHun;
 
@@ -31,6 +28,6 @@ public class MovieAndSubtitlesDTO {
     private Integer releaseYear;
 
     @Schema(description = "Movie's Subtitles")
-    private Set<Subtitle> subtitle;
+    private Set<Subtitle> subtitles;
 
 }
