@@ -123,49 +123,41 @@ alter table if exists MOVIES_subtitles
        foreign key (movies_ID)
        references MOVIES;
 
-INSERT
-INTO
-  movies
-  (TITLE_HUN, TITLE_ORIGINAL, DURATION, RELEASE_YEAR)
-VALUES
-  ('Legyetek jók ha tudtok', 'Stat buoni se potete', '02:19:17', 1983);
+insert into MOVIES (TITLE_HUN, TITLE_ORIGINAL, DURATION, RELEASE_YEAR)
+    values ('Legyetek jók ha tudtok', 'Stat buoni se potete', '02:19:17', 1983);
 
-INSERT
-INTO
-  movies
-  (TITLE_HUN, TITLE_ENGLISH, DURATION, RELEASE_YEAR)
-VALUES
-  ('A segítség', 'The help', '02:26:20', 2011);
+insert into MOVIES (TITLE_HUN, TITLE_ENGLISH, DURATION, RELEASE_YEAR)
+    values ('A segítség', 'The help', '02:26:20', 2011);
 
-insert into genres (name) values ('akció');
-insert into genres (name) values ('vígjáték');
-insert into genres (name) values ('dráma');
-insert into genres (name) values ('történelmi');
-insert into genres (name) values ('western');
-insert into genres (name) values ('fantasy');
-insert into genres (name) values ('sci-fi');
-insert into genres (name) values ('horror');
-insert into genres (name) values ('thriller');
-insert into genres (name) values ('romantikus');
-insert into genres (name) values ('rajzfilm');
-insert into genres (name) values ('anime');
-insert into genres (name) values ('dokumentum');
-insert into genres (name) values ('természet-film');
-insert into genres (name) values ('utifilm');
-insert into genres (name) values ('háborús-film');
-insert into genres (name) values ('némafilm');
+insert into GENRES (NAME) values ('akció');
+insert into GENRES (NAME) values ('vígjáték');
+insert into GENRES (NAME) values ('dráma');
+insert into GENRES (NAME) values ('történelmi');
+insert into GENRES (NAME) values ('western');
+insert into GENRES (NAME) values ('fantasy');
+insert into GENRES (NAME)  values ('sci-fi');
+insert into GENRES (NAME) values ('horror');
+insert into GENRES (NAME) values ('thriller');
+insert into GENRES (NAME) values ('romantikus');
+insert into GENRES (NAME) values ('rajzfilm');
+insert into GENRES (NAME) values ('anime');
+insert into GENRES (NAME) values ('dokumentum');
+insert into GENRES (NAME) values ('természet-film');
+insert into GENRES (NAME) values ('utifilm');
+insert into GENRES (NAME) values ('háborús-film');
+insert into GENRES (NAME) values ('némafilm');
 
-insert into codec_formats (name) values ('H264-BRRIP');
-insert into codec_formats (name) values ('H264-WEBRIP');
-insert into codec_formats (name) values ('H264-1080P');
-insert into codec_formats (name) values ('H264-720P');
-insert into codec_formats (name) values ('H265');
-insert into codec_formats (name) values ('H265-4K');
-insert into codec_formats (name) values ('XVID');
-insert into codec_formats (name) values ('DIVX');
-insert into codec_formats (name) values ('VHS');
-insert into codec_formats (name) values ('DVD');
-insert into codec_formats (name) values ('BLURAY');
+insert into CODEC_FORMATS (NAME) values ('H264-BRRIP');
+insert into CODEC_FORMATS (NAME) values ('H264-WEBRIP');
+insert into CODEC_FORMATS (NAME) values ('H264-1080P');
+insert into CODEC_FORMATS (NAME) values ('H264-720P');
+insert into CODEC_FORMATS (NAME) values ('H265');
+insert into CODEC_FORMATS (NAME) values ('H265-4K');
+insert into CODEC_FORMATS (NAME) values ('XVID');
+insert into CODEC_FORMATS (NAME) values ('DIVX');
+insert into CODEC_FORMATS (NAME) values ('VHS');
+insert into CODEC_FORMATS (NAME) values ('DVD');
+insert into CODEC_FORMATS (NAME) values ('BLURAY');
 
 insert into storage_types (name) values ('HDD');
 insert into storage_types (name) values ('VHS-KAZETTA');
@@ -183,6 +175,6 @@ insert into subtitles (language) values ('magyar-kiegészítő');
 insert into subtitles (language) values ('angol');
 insert into subtitles (language) values ('angol-kiegészítő');
 
-insert into directors (name, birthday) values ('Luigi Magni', '1928-03-21');
-insert into directors (name, birthday) values ('Tate Taylor', '1969-06-03');
+insert into DIRECTORS (NAME, BIRTHDAY) values ('Luigi Magni', '1928-03-21');
+insert into DIRECTORS (NAME, BIRTHDAY) values ('Tate Taylor', '1969-06-03');
 

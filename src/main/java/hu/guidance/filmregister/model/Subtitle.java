@@ -1,5 +1,6 @@
 package hu.guidance.filmregister.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Subtitle {
     @Column(name = "LANGUAGE")
     private String language;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "subtitles")
     private Set<Movie> movies = new HashSet<>();
 

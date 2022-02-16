@@ -1,5 +1,6 @@
 package hu.guidance.filmregister.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Audio {
     @Column(name = "LANGUAGE")
     private String language;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "audios")
     private Set<Movie> movies = new HashSet<>();
 

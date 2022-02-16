@@ -44,17 +44,18 @@ public class MovieSettingController {
         this.modelMapper = modelMapper;
     }
 
+    // first resource endpoint has some comments show the operating logic :)
     @PutMapping("/set-director/{id}")
     @Operation(summary = "Setting up the movie's Director")
     public MovieDTO setDirectorOfMovie(
             @PathVariable("id") Long movieId,
             @RequestBody DirectorDTO directorDto) {
 
-        // check data existing
+        // check if data exists
         MovieDTO movieDto = movieService.findMovieById(movieId);
         directorDto = directorService.findDirectorById(directorDto.getId());
 
-        // create updater command
+        // create an updater command
         Director director = modelMapper.map(directorDto, Director.class);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
 
@@ -149,8 +150,10 @@ public class MovieSettingController {
 
         MovieDTO movieDto = movieService.findMovieById(movieId);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
+
         command.setXResolution(xResolution);
         command.setYResolution(yResolution);
+
         return movieService.updateMovie(movieId, command);
     }
 

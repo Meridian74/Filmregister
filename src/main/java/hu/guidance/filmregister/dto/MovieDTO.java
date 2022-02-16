@@ -1,15 +1,13 @@
 package hu.guidance.filmregister.dto;
 
-import hu.guidance.filmregister.model.CodecFormat;
-import hu.guidance.filmregister.model.Director;
-import hu.guidance.filmregister.model.Genre;
-import hu.guidance.filmregister.model.StorageType;
+import hu.guidance.filmregister.model.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -52,5 +50,9 @@ public class MovieDTO {
     private CodecFormat codecFormat;
 
     private StorageType storageType;
+
+    private Set<Audio> audios;
+
+    private Set<Subtitle> subtitles;
 
 }

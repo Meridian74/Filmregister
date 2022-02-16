@@ -130,15 +130,21 @@ public class MovieServiceImpl implements MovieService {
         String englishTitle = command.getTitleEnglish();
         String originalTitle = command.getTitleOriginal();
 
-        if (!hunTitle.isEmpty() || !hunTitle.isBlank() ) {
+        if (hunTitle != null &&
+                !(hunTitle.isBlank() || hunTitle.isEmpty())) {
+
             movie.setTitleHun(command.getTitleHun());
             hunTitle = movie.getTitleHun();
         }
-        if (!englishTitle.isEmpty() || !englishTitle.isBlank()) {
+        if (englishTitle != null &&
+                !(englishTitle.isBlank() || englishTitle.isEmpty())) {
+
             movie.setTitleEnglish(command.getTitleEnglish());
             englishTitle = movie.getTitleEnglish();
         }
-        if (!originalTitle.isEmpty() || !originalTitle.isBlank()) {
+        if (originalTitle != null &&
+                !(originalTitle.isBlank() || originalTitle.isEmpty())) {
+
             movie.setTitleOriginal(command.getTitleOriginal());
             originalTitle = movie.getTitleOriginal();
         }
@@ -147,9 +153,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     private void checkThreeTitlesAreEmpty(String hunTitle, String englishTitle, String originalTitle) {
-        boolean hungarian = hunTitle.isEmpty() || hunTitle.isBlank();
-        boolean english = englishTitle.isEmpty() || englishTitle.isBlank();
-        boolean original = originalTitle.isEmpty() || originalTitle.isBlank();
+        boolean hungarian = hunTitle == null || hunTitle.isBlank() || hunTitle.isEmpty();
+        boolean english = englishTitle == null || englishTitle.isBlank() || englishTitle.isEmpty();
+        boolean original = originalTitle == null || originalTitle.isBlank() || originalTitle.isEmpty();
 
         if (hungarian && english && original) {
             throw new MovieAllTitlesAreEmptyException("All titles can not be empty or blank!");

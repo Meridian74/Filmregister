@@ -1,6 +1,7 @@
 package hu.guidance.filmregister.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -62,9 +63,11 @@ public class Movie {
     @JoinColumn(name = "STORAGE_TYPE_ID")
     private StorageType storageType;
 
+    @JsonManagedReference
     @ManyToMany
     private Set<Audio> audios = new HashSet<>();
 
+    @JsonManagedReference
     @ManyToMany
     private Set<Subtitle> subtitles = new HashSet<>();
 
