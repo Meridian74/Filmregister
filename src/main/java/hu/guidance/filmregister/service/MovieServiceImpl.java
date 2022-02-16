@@ -294,4 +294,17 @@ public class MovieServiceImpl implements MovieService {
             throw new MovieNotFoundException(movieId);
         }
     }
+
+    @Override
+    public MovieAndAudiosDTO listMovieAudios(Long id) {
+        MovieDTO movieDto = findMovieById(id);
+        return modelMapper.map(movieDto, MovieAndAudiosDTO.class);
+    }
+
+    @Override
+    public MovieAndSubtitlesDTO listMovieSubtitles(Long id) {
+        MovieDTO movieDto = findMovieById(id);
+        return modelMapper.map(movieDto, MovieAndSubtitlesDTO.class);
+    }
+
 }

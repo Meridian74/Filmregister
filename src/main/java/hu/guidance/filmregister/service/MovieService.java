@@ -23,4 +23,8 @@ public interface MovieService {
     MovieDTO addAudioIntoMovie(Long movieId, List<AudioDTO> audioDtos);
 
     MovieDTO addSubtitleIntoMovie(Long movieId, List<SubtitleDTO> subtitleDtos);
+
+    MovieAndAudiosDTO listMovieAudios(Long id);
+
+    MovieAndSubtitlesDTO listMovieSubtitles(Long id);
 }
