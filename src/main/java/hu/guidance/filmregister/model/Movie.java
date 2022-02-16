@@ -71,6 +71,12 @@ public class Movie {
     @ManyToMany
     private Set<Subtitle> subtitles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID", referencedColumnName = "id")
+    private Image poster;
+
+
+
     public void addAudio(Audio audio) {
         audios.add(audio);
         audio.getMovies().add(this);

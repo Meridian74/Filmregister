@@ -7,4 +7,6 @@ public interface ImageService {
     Long uploadImage(MultipartFile multipartImage);
 
     Resource findImageById(Long id);
+
+    void deleteImageById(Long id);
 }

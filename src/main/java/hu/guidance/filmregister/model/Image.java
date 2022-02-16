@@ -22,4 +22,7 @@ public class Image {
     @Column(name = "NAME")
     private String name;
 
+    @OneToOne(mappedBy = "poster")
+    private Movie movie;
+
 }
