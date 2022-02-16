@@ -1,4 +1,4 @@
-# Film jegyzék SPirng DATA JPA backend alkalmazás
+# Film jegyzék SPRING DATA JPA backend alkalmazás
 
 Url: http://localhost:8080/api
 
