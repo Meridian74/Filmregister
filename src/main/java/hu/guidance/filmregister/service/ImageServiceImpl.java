@@ -1,9 +1,12 @@
 package hu.guidance.filmregister.service;
 
 import hu.guidance.filmregister.exception.ImageIOException;
+import hu.guidance.filmregister.exception.ImageNotFoundException;
 import hu.guidance.filmregister.model.Image;
 import hu.guidance.filmregister.repository.ImageRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +33,14 @@ public class ImageServiceImpl implements ImageService {
         }
 
         return imageRepository.save(image).getId();
+    }
+
+    @Override
+    public Resource findImageById(Long id) {
+        byte[] image = imageRepository.findById(id)
+                .orElseThrow(() -> new ImageNotFoundException(id))
+                .getContent();
+        return new ByteArrayResource(image);
     }
 
 }

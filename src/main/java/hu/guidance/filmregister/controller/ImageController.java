@@ -2,10 +2,9 @@ package hu.guidance.filmregister.controller;
 
 import hu.guidance.filmregister.service.ImageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -20,9 +19,14 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    Long uploadImage(@RequestParam MultipartFile multipartImage) {
+    public Long uploadImage(@RequestParam MultipartFile multipartImage) {
 
         return imageService.uploadImage(multipartImage);
+    }
+
+    @GetMapping(value = "/{Id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public Resource downloadImage(@PathVariable Long id) {
+        return imageService.findImageById(id);
 
     }
 }
