@@ -1,18 +1,20 @@
 package hu.guidance.filmregister.controller;
 
-import hu.guidance.filmregister.dto.GenreDTO;
+import hu.guidance.filmregister.model.Image;
 import hu.guidance.filmregister.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/image")
@@ -33,7 +35,8 @@ public class ImageController {
 
     @GetMapping(value = "/{Id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public Resource downloadImage(@PathVariable Long id) {
-        return imageService.findImageById(id);
+        byte[] content = imageService.findImageById(id).getContent();
+        return new ByteArrayResource(content);
 
     }
 
@@ -46,9 +49,15 @@ public class ImageController {
         imageService.deleteImageById(id);
     }
 
-//    @GetMapping
-//    @Operation(summary = "List all movie genre - filtered by optional prefix string")
-//    public List<GenreDTO> listAllGenres(@RequestParam Optional<String> prefix) {
-//        return genreService.listAllGenres(prefix);
-//    }
+    @GetMapping
+    @Operation(summary = "List all image")
+    public List<Resource> listAllImages() {
+        List<Image> images = imageService.listAllImages();
+        List<Resource> resources = new ArrayList<>();
+        for (Image img: images) {
+            Resource resource = new ByteArrayResource(img.getContent());
+            resources.add(resource);
+        }
+        return resources;
+    }
 }

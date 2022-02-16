@@ -1,12 +1,16 @@
 package hu.guidance.filmregister.service;
 
-import org.springframework.core.io.Resource;
+import hu.guidance.filmregister.model.Image;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface ImageService {
     Long uploadImage(MultipartFile multipartImage);
 
-    Resource findImageById(Long id);
+    Image findImageById(Long id);
 
     void deleteImageById(Long id);
+
+    List<Image> listAllImages();
 }

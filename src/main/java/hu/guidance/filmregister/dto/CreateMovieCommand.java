@@ -1,9 +1,6 @@
 package hu.guidance.filmregister.dto;
 
-import hu.guidance.filmregister.model.CodecFormat;
-import hu.guidance.filmregister.model.Director;
-import hu.guidance.filmregister.model.Genre;
-import hu.guidance.filmregister.model.StorageType;
+import hu.guidance.filmregister.model.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -46,5 +43,8 @@ public class CreateMovieCommand {
     private CodecFormat codecFormat;
 
     private StorageType storageType;
+
+    @Schema(description = "Movie poster file")
+    private Image poster;
 
 }

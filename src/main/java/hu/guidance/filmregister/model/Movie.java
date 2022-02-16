@@ -72,9 +72,8 @@ public class Movie {
     private Set<Subtitle> subtitles = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID", referencedColumnName = "id")
+    @JoinColumn(name = "IMAGE_ID", referencedColumnName = "id")
     private Image poster;
-
 
 
     public void addAudio(Audio audio) {

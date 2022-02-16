@@ -52,7 +52,10 @@ public class MovieDTO {
     private StorageType storageType;
 
     private Set<Audio> audios;
-
+    
     private Set<Subtitle> subtitles;
+
+    @Schema(description = "Movie poster imagefile ")
+    private Image poster;
 
 }

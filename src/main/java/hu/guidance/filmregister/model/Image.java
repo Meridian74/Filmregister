@@ -9,6 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "IMAGES")
 public class Image {
 
     @Id

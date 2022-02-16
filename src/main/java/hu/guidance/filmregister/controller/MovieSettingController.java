@@ -1,10 +1,7 @@
 package hu.guidance.filmregister.controller;
 
 import hu.guidance.filmregister.dto.*;
-import hu.guidance.filmregister.model.CodecFormat;
-import hu.guidance.filmregister.model.Director;
-import hu.guidance.filmregister.model.Genre;
-import hu.guidance.filmregister.model.StorageType;
+import hu.guidance.filmregister.model.*;
 import hu.guidance.filmregister.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,6 +24,7 @@ public class MovieSettingController {
     private final GenreService genreService;
     private final CodecFormatService codecFormatService;
     private final StorageTypeService storageTypeService;
+    private final ImageService imageService;
     ModelMapper modelMapper;
 
     public MovieSettingController(MovieService movieService,
@@ -34,6 +32,7 @@ public class MovieSettingController {
                                   GenreService genreService,
                                   CodecFormatService codecFormatService,
                                   StorageTypeService storageTypeService,
+                                  ImageService imageService,
                                   ModelMapper modelMapper) {
 
         this.movieService = movieService;
@@ -41,6 +40,7 @@ public class MovieSettingController {
         this.genreService = genreService;
         this.codecFormatService = codecFormatService;
         this.storageTypeService = storageTypeService;
+        this.imageService = imageService;
         this.modelMapper = modelMapper;
     }
 
@@ -143,7 +143,7 @@ public class MovieSettingController {
 
     @PutMapping("/set-resolution/{id}")
     @Operation(summary = "Setting up the movie's pictures resolution")
-    public MovieDTO setYear(
+    public MovieDTO setResolution(
             @PathVariable("id") Long movieId,
             @RequestParam Integer xResolution,
             @RequestParam Integer yResolution) {
@@ -158,7 +158,7 @@ public class MovieSettingController {
     }
 
     @PutMapping("/set-storagenumber/{id}")
-    @Operation(summary = "Setting up the movie's pictures resolution")
+    @Operation(summary = "Setting up the movie's Storage Number")
     public MovieDTO setStorageNumber(
             @PathVariable("id") Long movieId,
             @RequestParam Integer storageNumber) {
@@ -213,6 +213,20 @@ public class MovieSettingController {
             @RequestBody List<SubtitleDTO> subtitleDtos) {
 
         return movieService.addSubtitleIntoMovie(movieId, subtitleDtos);
+    }
+
+    @PutMapping("/add-poster/{id}")
+    @Operation(summary = "Add poster to the movie by ID")
+    public MovieDTO addPosterToMovieById(
+            @PathVariable("id") Long movieId,
+            @RequestParam Long imageId) {
+
+        MovieDTO movieDto = movieService.findMovieById(movieId);
+        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
+        Image image = imageService.findImageById(imageId);
+
+        command.setPoster(image);
+        return movieService.updateMovie(movieId, command);
     }
 
 }

@@ -65,6 +65,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setStorageNumber(command.getStorageNumber());
         movie.setCodecFormat(command.getCodecFormat());
         movie.setStorageType(command.getStorageType());
+        movie.setPoster(command.getPoster());
     }
 
     @Override
@@ -95,6 +96,33 @@ public class MovieServiceImpl implements MovieService {
         return modelMapper.map(movie, MovieDTO.class);
     }
 
+    private void setMovieTitles(Movie movie, UpdateMovieCommand command) {
+        String hunTitle = command.getTitleHun();
+        String englishTitle = command.getTitleEnglish();
+        String originalTitle = command.getTitleOriginal();
+
+        if (hunTitle != null &&
+                !(hunTitle.isBlank() || hunTitle.isEmpty())) {
+
+            movie.setTitleHun(command.getTitleHun());
+            hunTitle = movie.getTitleHun();
+        }
+        if (englishTitle != null &&
+                !(englishTitle.isBlank() || englishTitle.isEmpty())) {
+
+            movie.setTitleEnglish(command.getTitleEnglish());
+            englishTitle = movie.getTitleEnglish();
+        }
+        if (originalTitle != null &&
+                !(originalTitle.isBlank() || originalTitle.isEmpty())) {
+
+            movie.setTitleOriginal(command.getTitleOriginal());
+            originalTitle = movie.getTitleOriginal();
+        }
+
+        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
+    }
+
     private void setMovieOtherData(Movie movie, UpdateMovieCommand command) {
         if (command.getDuration() != null) {
             movie.setDuration(command.getDuration());
@@ -123,33 +151,9 @@ public class MovieServiceImpl implements MovieService {
         if (command.getCodecFormat() != null) {
             movie.setCodecFormat(command.getCodecFormat());
         }
-    }
-
-    private void setMovieTitles(Movie movie, UpdateMovieCommand command) {
-        String hunTitle = command.getTitleHun();
-        String englishTitle = command.getTitleEnglish();
-        String originalTitle = command.getTitleOriginal();
-
-        if (hunTitle != null &&
-                !(hunTitle.isBlank() || hunTitle.isEmpty())) {
-
-            movie.setTitleHun(command.getTitleHun());
-            hunTitle = movie.getTitleHun();
+        if (command.getPoster() != null) {
+            movie.setPoster(command.getPoster());
         }
-        if (englishTitle != null &&
-                !(englishTitle.isBlank() || englishTitle.isEmpty())) {
-
-            movie.setTitleEnglish(command.getTitleEnglish());
-            englishTitle = movie.getTitleEnglish();
-        }
-        if (originalTitle != null &&
-                !(originalTitle.isBlank() || originalTitle.isEmpty())) {
-
-            movie.setTitleOriginal(command.getTitleOriginal());
-            originalTitle = movie.getTitleOriginal();
-        }
-
-        checkThreeTitlesAreEmpty(hunTitle, englishTitle, originalTitle);
     }
 
     private void checkThreeTitlesAreEmpty(String hunTitle, String englishTitle, String originalTitle) {

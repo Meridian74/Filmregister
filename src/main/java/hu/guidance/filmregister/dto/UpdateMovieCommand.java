@@ -54,4 +54,7 @@ public class UpdateMovieCommand {
 
     private Set<Audio> audios = new HashSet<>();
 
+    @Schema(description = "Movie poster file")
+    private Image poster;
+
 }
