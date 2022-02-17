@@ -25,7 +25,7 @@ public class AudioController {
         this.audioService = audioService;
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"application/json"}, produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new audio language.")
     @ApiResponse(responseCode = "201", description = "Audio language has been created.")
@@ -33,13 +33,13 @@ public class AudioController {
         return audioService.createAudio(command);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = { "application/json" })
     @Operation(summary = "find and get an audio language by its id")
     public AudioDTO findAudioById(@PathVariable("id") Long id) {
         return audioService.findAudioById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = { "application/json" })
     @Operation(summary = "Updating an audio language with given data founded it by ID number")
     public AudioDTO updateAudio(
             @Valid
@@ -56,7 +56,7 @@ public class AudioController {
         audioService.deleteAudioById(id);
     }
 
-    @GetMapping
+    @GetMapping(produces = { "application/json" })
     @Operation(summary = "List all audio language - filtered by optional prefix string")
     public List<AudioDTO> listAllAudios(@RequestParam Optional<String> prefix) {
         return audioService.listAllAudios(prefix);
