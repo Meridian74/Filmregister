@@ -69,6 +69,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-genre/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setGenreOfMovie(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody GenreDTO genreDto) {
 
@@ -86,6 +87,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-codecformat/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setCodecFormatOfMovie(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody CodecFormatDTO codecFormatDto) {
 
@@ -103,6 +105,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-storagetype/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setStorageTypeOfMovie(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody StorageTypeDTO storageTypeDto) {
 
@@ -120,6 +123,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-duration/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setDuration(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestParam String duration) {
 
@@ -132,6 +136,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-releaseyear/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setYear(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestParam Integer year) {
 
@@ -144,8 +149,11 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-resolution/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setResolution(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
+            @Parameter(description = "Movie picture width in pixels")
             @RequestParam Integer xResolution,
+            @Parameter(description = "Movie picture height in pixels")
             @RequestParam Integer yResolution) {
 
         MovieDTO movieDto = movieService.findMovieById(movieId);
@@ -160,7 +168,9 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-storagenumber/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setStorageNumber(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
+            @Parameter(description = "Number of the Storage")
             @RequestParam Integer storageNumber) {
 
         MovieDTO movieDto = movieService.findMovieById(movieId);
@@ -172,9 +182,13 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/set-titles/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setTitles(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
+            @Parameter(description = "new Hungarian title")
             @RequestParam(required = false) String hunTitle,
+            @Parameter(description = "new English title")
             @RequestParam(required = false) String engTitle,
+            @Parameter(description = "new Original language title")
             @RequestParam(required = false) String originalTitle
     ) {
 
@@ -189,6 +203,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/delete-titles/{id}")
     public MovieDTO deleteTitle(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestParam String titleType) {
 
@@ -198,6 +213,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/add-audios/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO addAudio(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody List<AudioDTO> audioDtos) {
 
@@ -207,6 +223,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value ="/add-subtitles/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO addSubtitle(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody List<SubtitleDTO> subtitleDtos) {
 
@@ -216,6 +233,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @Override
     @PutMapping(value = "/add-poster/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO addPosterToMovieById(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestParam Long imageId) {
 
