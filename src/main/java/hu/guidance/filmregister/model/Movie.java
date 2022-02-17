@@ -1,6 +1,7 @@
 package hu.guidance.filmregister.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Movie {
     @Column(name = "TITLE_ORIGINAL")
     private String titleOriginal;
 
+    @Schema(description = "Movie play length - autoconvert into seconds", example = "01:23:49")
     @Convert(converter = MovieDurationConverter.class)
     @Column(name = "DURATION")
     private String duration;

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/movie/setting")
-@Tag(name = "Setting of the movie's properties")
+@Tag(name = "Setting Movie's properties")
 public class MovieSettingControllerImpl implements MovieSettingController {
 
     private final MovieService movieService;

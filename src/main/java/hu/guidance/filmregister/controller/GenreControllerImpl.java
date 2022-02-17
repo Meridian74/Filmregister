@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/genre")
-@Tag(name = "Operations on movie's Genre records")
+@Tag(name = "Operations on Genre records")
 public class GenreControllerImpl implements GenreController {
 
     private final GenreService genreService;

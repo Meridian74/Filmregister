@@ -4,7 +4,6 @@ import hu.guidance.filmregister.model.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.time.LocalTime;
 import java.util.Set;
 
 @Getter
@@ -25,13 +24,11 @@ public class MovieDTO {
     @Schema(description = "Original title of the movie", example = "State buoni se potete")
     private String titleOriginal;
 
-    @Schema(description = "Movie play length, film duration", example = "01:23:49")
-    private LocalTime duration;
-
+    @Schema(description = "Movie play length - autoconvert into seconds", example = "01:23:49")
+    private String duration;
 
     @Schema(description = "Release year", example = "1983")
     private Integer releaseYear;
-
 
     @Schema(description = "Video screen X resolution", example = "736")
     private Integer xResolution;

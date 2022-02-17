@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/director")
-@Tag(name = "Operations on movie's Director records")
+@Tag(name = "Operations on Director records")
 public class DirectorControllerImpl implements DirectorController {
 
     private final DirectorService directorService;
