@@ -93,6 +93,12 @@
 			<groupId>org.zalando</groupId>
 			<artifactId>problem-spring-web-starter</artifactId>
 			<version>0.27.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>apiguardian-api</artifactId>
+					<groupId>org.apiguardian</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 	</dependencies>
