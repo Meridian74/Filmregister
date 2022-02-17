@@ -1,232 +1,98 @@
 package hu.guidance.filmregister.controller;
 
 import hu.guidance.filmregister.dto.*;
-import hu.guidance.filmregister.model.*;
-import hu.guidance.filmregister.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.List;
 
-
-@RestController
-@RequestMapping("/api/movie/setting")
-@Tag(name = "Setting of the movie's properties")
-public class MovieSettingController {
-
-    private final MovieService movieService;
-    private final DirectorService directorService;
-    private final GenreService genreService;
-    private final CodecFormatService codecFormatService;
-    private final StorageTypeService storageTypeService;
-    private final ImageService imageService;
-    ModelMapper modelMapper;
-
-    public MovieSettingController(MovieService movieService,
-                                  DirectorService directorService,
-                                  GenreService genreService,
-                                  CodecFormatService codecFormatService,
-                                  StorageTypeService storageTypeService,
-                                  ImageService imageService,
-                                  ModelMapper modelMapper) {
-
-        this.movieService = movieService;
-        this.directorService = directorService;
-        this.genreService = genreService;
-        this.codecFormatService = codecFormatService;
-        this.storageTypeService = storageTypeService;
-        this.imageService = imageService;
-        this.modelMapper = modelMapper;
-    }
-
+public interface MovieSettingController {
     // first resource endpoint has some comments show the operating logic :)
-    @PutMapping("/set-director/{id}")
+    @PutMapping(value = "/set-director/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's Director")
-    public MovieDTO setDirectorOfMovie(
+    MovieDTO setDirectorOfMovie(
             @PathVariable("id") Long movieId,
-            @RequestBody DirectorDTO directorDto) {
+            @RequestBody DirectorDTO directorDto);
 
-        // check if data exists
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        directorDto = directorService.findDirectorById(directorDto.getId());
-
-        // create an updater command
-        Director director = modelMapper.map(directorDto, Director.class);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-
-        // update command data
-        command.setDirector(director);
-
-        // commit into database
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-genre/{id}")
+    @PutMapping(value = "/set-genre/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's Genre")
-    public MovieDTO setGenreOfMovie(
+    MovieDTO setGenreOfMovie(
             @PathVariable("id") Long movieId,
-            @RequestBody GenreDTO genreDto) {
+            @RequestBody GenreDTO genreDto);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        genreDto = genreService.findGenreById(genreDto.getId());
-
-        Genre genre = modelMapper.map(genreDto, Genre.class);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-
-        command.setGenre(genre);
-
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-codecformat/{id}")
+    @PutMapping(value = "/set-codecformat/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's video Codec Format")
-    public MovieDTO setCodecFormatOfMovie(
+    MovieDTO setCodecFormatOfMovie(
             @PathVariable("id") Long movieId,
-            @RequestBody CodecFormatDTO codecFormatDto) {
+            @RequestBody CodecFormatDTO codecFormatDto);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        codecFormatDto = codecFormatService.findCodecFormatById(codecFormatDto.getId());
-
-        CodecFormat codecFormat = modelMapper.map(codecFormatDto, CodecFormat.class);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-
-        command.setCodecFormat(codecFormat);
-
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-storagetype/{id}")
+    @PutMapping(value = "/set-storagetype/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's Storage Type")
-    public MovieDTO setStorageTypeOfMovie(
+    MovieDTO setStorageTypeOfMovie(
             @PathVariable("id") Long movieId,
-            @RequestBody StorageTypeDTO storageTypeDto) {
+            @RequestBody StorageTypeDTO storageTypeDto);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        storageTypeDto = storageTypeService.findStorageTypeById(storageTypeDto.getId());
-
-        StorageType storageType = modelMapper.map(storageTypeDto, StorageType.class);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-
-        command.setStorageType(storageType);
-
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-duration/{id}")
+    @PutMapping(value = "/set-duration/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie time")
-    public MovieDTO setDuration(
+    MovieDTO setDuration(
             @PathVariable("id") Long movieId,
-            @RequestParam LocalTime duration) {
+            @RequestParam LocalTime duration);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-        command.setDuration(duration);
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-releaseyear/{id}")
+    @PutMapping(value = "/set-releaseyear/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's release year")
-    public MovieDTO setYear(
+    MovieDTO setYear(
             @PathVariable("id") Long movieId,
-            @RequestParam Integer year) {
+            @RequestParam Integer year);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-        command.setReleaseYear(year);
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-resolution/{id}")
+    @PutMapping(value = "/set-resolution/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's pictures resolution")
-    public MovieDTO setResolution(
+    MovieDTO setResolution(
             @PathVariable("id") Long movieId,
             @RequestParam Integer xResolution,
-            @RequestParam Integer yResolution) {
+            @RequestParam Integer yResolution);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-
-        command.setXResolution(xResolution);
-        command.setYResolution(yResolution);
-
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-storagenumber/{id}")
+    @PutMapping(value = "/set-storagenumber/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's Storage Number")
-    public MovieDTO setStorageNumber(
+    MovieDTO setStorageNumber(
             @PathVariable("id") Long movieId,
-            @RequestParam Integer storageNumber) {
+            @RequestParam Integer storageNumber);
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-        command.setStorageNumber(storageNumber);
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping("/set-titles/{id}")
+    @PutMapping(value = "/set-titles/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's all title")
-    public MovieDTO setTitles(
+    MovieDTO setTitles(
             @PathVariable("id") Long movieId,
             @RequestParam(required = false) String hunTitle,
             @RequestParam(required = false) String engTitle,
             @RequestParam(required = false) String originalTitle
-    ) {
+    );
 
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-        command.setTitleHun(hunTitle);
-        command.setTitleEnglish(engTitle);
-        command.setTitleOriginal(originalTitle);
-        return movieService.updateMovie(movieId, command);
-    }
-
-    @PutMapping(path = "/delete-titles/{id}")
+    @PutMapping(value = "/delete-titles/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a movie's title")
     @ApiResponse(responseCode = "204", description = "Movie title has been deleted")
-    public MovieDTO deleteTitle(
+    MovieDTO deleteTitle(
             @PathVariable("id") Long movieId,
-            @RequestParam String titleType) {
+            @RequestParam String titleType);
 
-        return movieService.deleteMovieTitleByType(movieId, titleType.toLowerCase());
-    }
-
-    @PutMapping("/add-audios/{id}")
+    @PutMapping(value = "/add-audios/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add audio langue(s) into the movie")
-    public MovieDTO addAudio(
+    MovieDTO addAudio(
             @PathVariable("id") Long movieId,
-            @RequestBody List<AudioDTO> audioDtos) {
+            @RequestBody List<AudioDTO> audioDtos);
 
-        return movieService.addAudioIntoMovie(movieId, audioDtos);
-    }
-
-    @PutMapping("/add-subtitles/{id}")
+    @PutMapping(value = "/add-subtitles/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add subtitle langue(s) into the movie")
-    public MovieDTO addSubtitle(
+    MovieDTO addSubtitle(
             @PathVariable("id") Long movieId,
-            @RequestBody List<SubtitleDTO> subtitleDtos) {
+            @RequestBody List<SubtitleDTO> subtitleDtos);
 
-        return movieService.addSubtitleIntoMovie(movieId, subtitleDtos);
-    }
-
-    @PutMapping("/add-poster/{id}")
+    @PutMapping(value = "/add-poster/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add poster to the movie by ID")
-    public MovieDTO addPosterToMovieById(
+    MovieDTO addPosterToMovieById(
             @PathVariable("id") Long movieId,
-            @RequestParam Long imageId) {
-
-        MovieDTO movieDto = movieService.findMovieById(movieId);
-        UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
-        Image image = imageService.findImageById(imageId);
-
-        command.setPoster(image);
-        return movieService.updateMovie(movieId, command);
-    }
-
+            @RequestParam Long imageId);
 }

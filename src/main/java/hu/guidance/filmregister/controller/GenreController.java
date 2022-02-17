@@ -1,65 +1,43 @@
 package hu.guidance.filmregister.controller;
 
-import hu.guidance.filmregister.dto.GenreDTO;
 import hu.guidance.filmregister.dto.CreateGenreCommand;
+import hu.guidance.filmregister.dto.GenreDTO;
 import hu.guidance.filmregister.dto.UpdateGenreCommand;
-import hu.guidance.filmregister.service.GenreService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/genre")
-@Tag(name = "Operations on movie's Genre records")
-public class GenreController {
-
-    private final GenreService genreService;
-
-    public GenreController(GenreService genreService) {
-        this.genreService = genreService;
-    }
-
-    @PostMapping
+public interface GenreController {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie genre")
     @ApiResponse(responseCode = "201", description = "Movie genre has been created")
-    public GenreDTO createGenre(@Valid @RequestBody CreateGenreCommand command) {
-        return genreService.createGenre(command);
-    }
+    GenreDTO createGenre(@Valid @RequestBody CreateGenreCommand command);
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find and get a movie genre by ID")
-    public GenreDTO findGenreById(@PathVariable("id") Long id) {
-        return genreService.findGenreById(id);
-    }
+    GenreDTO findGenreById(@PathVariable("id") Long id);
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Updating a movie genre with given data founded it by ID number")
-    public GenreDTO updateGenre(
+    GenreDTO updateGenre(
             @Valid
             @PathVariable("id") Long id,
-            @RequestBody UpdateGenreCommand command) {
-        return genreService.updateGenre(id, command);
-    }
+            @RequestBody UpdateGenreCommand command);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a movie genre by ID number")
     @ApiResponse(responseCode = "204", description = "Movie genre has been deleted")
-    public void deleteGenre(@PathVariable("id") Long id) {
-        genreService.deleteGenreById(id);
-    }
+    void deleteGenre(@PathVariable("id") Long id);
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "List all movie genre - filtered by optional prefix string")
-    public List<GenreDTO> listAllGenres(@RequestParam Optional<String> prefix) {
-        return genreService.listAllGenres(prefix);
-    }
+    List<GenreDTO> listAllGenres(@RequestParam Optional<String> prefix);
 }
-

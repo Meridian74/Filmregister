@@ -1,64 +1,43 @@
 package hu.guidance.filmregister.controller;
 
-import hu.guidance.filmregister.dto.SubtitleDTO;
 import hu.guidance.filmregister.dto.CreateSubtitleCommand;
+import hu.guidance.filmregister.dto.SubtitleDTO;
 import hu.guidance.filmregister.dto.UpdateSubtitleCommand;
-import hu.guidance.filmregister.service.SubtitleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/subtitle")
-@Tag(name = "Operations on Subtitle records")
-public class SubtitleController {
-
-    private final SubtitleService subtitleService;
-
-    public SubtitleController(SubtitleService subtitleService) {
-        this.subtitleService = subtitleService;
-    }
-
-    @PostMapping
+public interface SubtitleController {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new subtitle language.")
     @ApiResponse(responseCode = "201", description = "Subtitle language has been created.")
-    public SubtitleDTO createSubtitle(@Valid @RequestBody CreateSubtitleCommand command) {
-        return subtitleService.createSubtitle(command);
-    }
+    SubtitleDTO createSubtitle(@Valid @RequestBody CreateSubtitleCommand command);
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "find and get an subtitle language by its id")
-    public SubtitleDTO findSubtitleById(@PathVariable("id") Long id) {
-        return subtitleService.findSubtitleById(id);
-    }
+    SubtitleDTO findSubtitleById(@PathVariable("id") Long id);
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Updating an subtitle language with given data founded it by ID number")
-    public SubtitleDTO updateSubtitle(
+    SubtitleDTO updateSubtitle(
             @Valid
             @PathVariable("id") Long id,
-            @RequestBody UpdateSubtitleCommand command) {
-        return subtitleService.updateSubtitle(id, command);
-    }
+            @RequestBody UpdateSubtitleCommand command);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete an subtitle by ID number")
     @ApiResponse(responseCode = "204", description = "Subtitle language has been deleted")
-    public void deleteSubtitle(@PathVariable("id") Long id) {
-        subtitleService.deleteSubtitleById(id);
-    }
+    void deleteSubtitle(@PathVariable("id") Long id);
 
-    @GetMapping
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "List all subtitle language - filtered by optional prefix string")
-    public List<SubtitleDTO> listAllSubtitles(@RequestParam Optional<String> prefix) {
-        return subtitleService.listAllSubtitles(prefix);
-    }
+    List<SubtitleDTO> listAllSubtitles(@RequestParam Optional<String> prefix);
 }

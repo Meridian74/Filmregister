@@ -3,63 +3,41 @@ package hu.guidance.filmregister.controller;
 import hu.guidance.filmregister.dto.CreateStorageTypeCommand;
 import hu.guidance.filmregister.dto.StorageTypeDTO;
 import hu.guidance.filmregister.dto.UpdateStorageTypeCommand;
-import hu.guidance.filmregister.service.StorageTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/storagetype")
-@Tag(name = "Operations on Storage Type records")
-public class StorageTypeController {
-
-    private final StorageTypeService storageTypeService;
-
-    public StorageTypeController(StorageTypeService storageTypeService) {
-        this.storageTypeService = storageTypeService;
-    }
-
-    @PostMapping
+public interface StorageTypeController {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new storage type")
     @ApiResponse(responseCode = "201", description = "Storage type has been created")
-    public StorageTypeDTO createStorageType(@Valid @RequestBody CreateStorageTypeCommand command) {
-        return storageTypeService.createStorageType(command);
-    }
+    StorageTypeDTO createStorageType(@Valid @RequestBody CreateStorageTypeCommand command);
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find and get a storage type by ID")
-    public StorageTypeDTO findStorageTypeById(@PathVariable("id") Long id) {
-        return storageTypeService.findStorageTypeById(id);
-    }
+    StorageTypeDTO findStorageTypeById(@PathVariable("id") Long id);
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Updating a storage type with given data founded it by ID number")
-    public StorageTypeDTO updateStorageType(
+    StorageTypeDTO updateStorageType(
             @Valid
             @PathVariable("id") Long id,
-            @RequestBody UpdateStorageTypeCommand command) {
-        return storageTypeService.updateStorageType(id, command);
-    }
+            @RequestBody UpdateStorageTypeCommand command);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a storage type by ID number")
     @ApiResponse(responseCode = "204", description = "Movie storageType has been deleted")
-    public void deleteStorageType(@PathVariable("id") Long id) {
-        storageTypeService.deleteStorageTypeById(id);
-    }
+    void deleteStorageType(@PathVariable("id") Long id);
 
-    @GetMapping
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "List all storage type - filtered by optional prefix string")
-    public List<StorageTypeDTO> listAllStorageTypes(@RequestParam Optional<String> prefix) {
-        return storageTypeService.listAllStorageTypes(prefix);
-    }
-    
+    List<StorageTypeDTO> listAllStorageTypes(@RequestParam Optional<String> prefix);
 }
