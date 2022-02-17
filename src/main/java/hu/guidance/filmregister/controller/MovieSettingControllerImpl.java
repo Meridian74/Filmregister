@@ -3,6 +3,7 @@ package hu.guidance.filmregister.controller;
 import hu.guidance.filmregister.dto.*;
 import hu.guidance.filmregister.model.*;
 import hu.guidance.filmregister.service.*;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
@@ -42,9 +43,11 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     }
 
     // first resource endpoint has some comments show the operating logic :)
+
     @Override
     @PutMapping(value = "/set-director/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setDirectorOfMovie(
+            @Parameter(description = "Movie ID to select a movie")
             @PathVariable("id") Long movieId,
             @RequestBody DirectorDTO directorDto) {
 
