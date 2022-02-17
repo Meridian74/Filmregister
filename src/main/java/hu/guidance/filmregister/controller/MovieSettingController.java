@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public interface MovieSettingController {
@@ -40,7 +39,7 @@ public interface MovieSettingController {
     @Operation(summary = "Setting up the movie time")
     MovieDTO setDuration(
             @PathVariable("id") Long movieId,
-            @RequestParam LocalTime duration);
+            @RequestParam String duration);
 
     @PutMapping(value = "/set-releaseyear/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Setting up the movie's release year")

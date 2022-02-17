@@ -1,11 +1,9 @@
 package hu.guidance.filmregister.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,9 +29,9 @@ public class Movie {
     @Column(name = "TITLE_ORIGINAL")
     private String titleOriginal;
 
+    @Convert(converter = MovieDurationConverter.class)
     @Column(name = "DURATION")
-    @JsonFormat(pattern="HH:mm:ss")
-    private LocalTime duration;
+    private String duration;
 
     @Column(name = "RELEASE_YEAR")
     private Integer releaseYear;

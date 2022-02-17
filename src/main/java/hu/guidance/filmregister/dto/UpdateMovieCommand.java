@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +29,7 @@ public class UpdateMovieCommand {
     private String titleOriginal;
 
     @Schema(description = "Updated/old movie length", example = "01:28:31")
-    private LocalTime duration;
+    private String duration;
 
     @Schema(description = "Updated/old Movie release year", example = "1986")
     private Integer releaseYear;

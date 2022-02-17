@@ -4,8 +4,6 @@ import hu.guidance.filmregister.model.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.time.LocalTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class CreateMovieCommand {
     private String titleOriginal;
 
     @Schema(description = "Movie length", example = "01:28:31")
-    private LocalTime duration;
+    private String duration;
 
     @Schema(description = "Movie release year", example = "1986")
     private Integer releaseYear;

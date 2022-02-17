@@ -24,7 +24,7 @@ create table MOVIES (
         TITLE_ENGLISH varchar(255),
         TITLE_HUN varchar(255),
         TITLE_ORIGINAL varchar(255),
-        DURATION time,
+        DURATION int4,
         RELEASE_YEAR int4,
         X_RESOLUTION int4,
         Y_RESOLUTION int4,
@@ -139,10 +139,10 @@ alter table if exists MOVIES
        references IMAGES;
 
 insert into MOVIES (TITLE_HUN, TITLE_ORIGINAL, DURATION, RELEASE_YEAR)
-    values ('Legyetek jók ha tudtok', 'Stat buoni se potete', '02:19:17', 1983);
+    values ('Legyetek jók ha tudtok', 'Stat buoni se potete', 4757, 1983);
 
 insert into MOVIES (TITLE_HUN, TITLE_ENGLISH, DURATION, RELEASE_YEAR)
-    values ('A segítség', 'The help', '02:26:20', 2011);
+    values ('A segítség', 'The help', 8780, 2011);
 
 insert into GENRES (NAME) values ('akció');
 insert into GENRES (NAME) values ('vígjáték');

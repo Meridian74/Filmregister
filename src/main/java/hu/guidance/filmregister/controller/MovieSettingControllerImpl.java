@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 
@@ -119,7 +118,7 @@ public class MovieSettingControllerImpl implements MovieSettingController {
     @PutMapping(value = "/set-duration/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDTO setDuration(
             @PathVariable("id") Long movieId,
-            @RequestParam LocalTime duration) {
+            @RequestParam String duration) {
 
         MovieDTO movieDto = movieService.findMovieById(movieId);
         UpdateMovieCommand command = modelMapper.map(movieDto, UpdateMovieCommand.class);
