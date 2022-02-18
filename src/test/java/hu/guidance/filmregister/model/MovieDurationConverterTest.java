@@ -16,6 +16,7 @@ class MovieDurationConverterTest {
     static Stream<Arguments> secondsToTimeCode() {
         return Stream.of(
                 arguments(0, "0:00:00"),
+                arguments(121, "0:02:01"),
                 arguments(12896, "3:34:56"),
                 arguments(264896, "73:34:56")
         );
