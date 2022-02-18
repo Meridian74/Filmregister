@@ -35,5 +35,13 @@ Törölni egyelőre csak címet, megadva, hogy hungarian, english vagy original 
 Más adatot nem lehet még törölni, továbbá a kapcsolódó táblák adatai egyformák is lehetnek k(pl 3x is felvehetjük ugyanazt a rendezőt, vagy audiot, stb)
 Ez később megvalósítható a settings controller bővítésével.
 
------s
-Amit továbbá még nem tud, de meg kell valósítani: egy poszterkép eltárolása az adott filmhez.
+
+### DOCKER KONTÉNER FUTTATÁSA
+
+Dockeres indításhoz a projekt könyvtárban állva következő parancsot írjuk be a terminálban:
+
+>> "docker build -t filmregister ."
+
+Ezt követően be kell lépni a 'filmregister' nevű könyvtárba és ott a következő parancsot írjuk be a terminálba:
+
+>> "docker compose up"
