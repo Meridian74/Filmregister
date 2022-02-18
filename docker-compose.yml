@@ -1,21 +1,23 @@
 version: '3'
 
 services:
-  filmregister-postgres:
+  postgre-db:
     image: postgres
     restart: always
     ports:
       - '5434:5432'
     environment:
+      POSTGRES_DB: filmregister
+      POSTGRES_USER: lazzlo74
       POSTGRES_PASSWORD: lazzlo74
 
-  filmregister-app:
+  app-server:
     image: filmregister
     restart: always
     ports:
       - '8080:8080'
     depends_on:
-      - filmregister-postgres
+      - postgre-db
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:postgresql://filmregister-postgres/postgres'
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgre-db/filmregister'
     entrypoint: ['java', '-jar', 'filmregister.jar']

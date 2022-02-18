@@ -43,5 +43,7 @@ class MovieRepositoryTest {
         assertThat(movies)
                 .extracting(Movie::getDuration)
                 .containsExactly("2:01:45");
+
+        
     }
 }

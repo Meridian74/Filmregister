@@ -39,9 +39,4 @@ Ez később megvalósítható a settings controller bővítésével.
 ### DOCKER KONTÉNER FUTTATÁSA
 
 Dockeres indításhoz a projekt könyvtárban állva következő parancsot írjuk be a terminálban:
-
->> "docker build -t filmregister ."
-
-Ezt követően be kell lépni a 'filmregister' nevű könyvtárba és ott a következő parancsot írjuk be a terminálba:
-
->> "docker compose up"
+> docker-run.bat

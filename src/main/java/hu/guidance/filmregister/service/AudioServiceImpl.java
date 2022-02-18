@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,9 @@ public class AudioServiceImpl implements AudioService {
         audio.setLanguage(command.getLanguage());
 
         audio = audioRepository.save(audio);
-        return modelMapper.map(audio, AudioDTO.class);
+
+        AudioDTO result = modelMapper.map(audio, AudioDTO.class);
+        return result;
 
     }
 
@@ -42,7 +43,8 @@ public class AudioServiceImpl implements AudioService {
         Optional<Audio> optionalAudio = audioRepository.findById(id);
 
         if (optionalAudio.isPresent()) {
-            return modelMapper.map(optionalAudio.get(), AudioDTO.class);
+            AudioDTO result = modelMapper.map(optionalAudio.get(), AudioDTO.class);
+            return result;
         }
         else {
             throw new AudioNotFoundException(id);
@@ -50,7 +52,6 @@ public class AudioServiceImpl implements AudioService {
     }
 
     @Override
-    @Transactional
     public AudioDTO updateAudio(Long id, UpdateAudioCommand command) {
         Optional<Audio> optionalAudio = audioRepository.findById(id);
 
