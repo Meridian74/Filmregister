@@ -43,7 +43,10 @@ public class MovieDurationConverter implements AttributeConverter<String, Intege
 
 
         if (minutes.equals("0")) minutes = "00";
+        if (minutes.length() == 1) minutes = "0" + minutes;
+
         if (seconds.equals("0")) seconds = "00";
+        if (seconds.length() == 1) seconds = "0" + seconds;
 
         return hours + ":" + minutes + ":" + seconds;
     }
